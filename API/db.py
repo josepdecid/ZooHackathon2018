@@ -12,7 +12,6 @@ class DBConnection(metaclass=Singleton):
 
     def insert_posts(self, posts):
         self.db.posts.insert_many(posts)
-
         users = self.db["users"]
         for x in posts:
             user_find = users.find({"_id": x.user.id})
@@ -21,10 +20,8 @@ class DBConnection(metaclass=Singleton):
                 self.db.users.insert(x.user)
             else:
                 x.user.posts.append(x.id)
-                self.db.users.update_one({"posts" : x.user.posts})
+                self.db.users.update_one({"posts": x.user.posts})
 
-
-
-
-
-
+    def delete_post(self, id):
+        self.db.posts.delete_one({"_id": id})
+    
