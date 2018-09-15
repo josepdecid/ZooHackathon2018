@@ -1,6 +1,8 @@
 from scrapy import Selector
 from geopy.geocoders import Nominatim
 
+from analysis.vision import VisionAPI
+
 
 class TextScrapper:
     def __init__(self, text):
@@ -37,9 +39,9 @@ class TextScrapper:
         def get_price():
             return self.get_by_xpath('//*[@id="lote-info"]/div/div[1]/span[1]/span/text()')[0]
 
-        def get_image():
-            image = self.get_by_xpath('//*[@id="foto_principal"]/img/@src')[0]
-            return image
+        def get_images():
+            images = self.get_by_xpath('//*[@id="foto_principal"]/img/@src')
+            return images
 
         def get_location():
             locations = self.get_by_xpath('//*[@id="info_vendedor_box"]/div[1]/div/div[2]/p[2]/text()')
@@ -54,19 +56,26 @@ class TextScrapper:
             date = [x.rstrip() for x in dates if len(x) > 1][0]
             return date
 
+        def get_tags(image_urls):
+            return VisionAPI().get_image_labels(image_urls)
+
+        def get_user():
+            return {
+                'name': self.get_by_xpath('/html/body/div/div[2]/div/div[3]/div[2]/div/div[1]/div/div[2]/h2/a/strong/text()'),
+                'url': self.get_by_xpath('/html/body/div/div[2]/div/div[3]/div[2]/div/div[1]/div/div[2]/h2/a/@href')
+            }
+
+        images = get_images()
+
         data = {
             'title': get_title(),
             'description': get_description(),
             'date': get_date(),
             'location': get_location(),
-            'images': get_image(),
-            'tags': self.get_by_xpath('/html/body/div/div[1]/div[2]/div/div/div[2]/div/div[2]/div[2]/div/div[1]/div/p[2]/span[2]/em'),
+            'images': images,
+            'tags': get_tags(images),
             'price': get_price(),
             'url': '',
-            'user': {
-                'name': '',
-                'profile': '',
-                'extra': {}
-            }
+            'user': get_user()
         }
         return data

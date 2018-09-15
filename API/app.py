@@ -6,6 +6,7 @@ from flask import jsonify
 from flask_cors import CORS
 
 from db import DBConnection
+from analysis.vision import VisionAPI
 
 app = Flask(__name__)
 CORS(app)
@@ -50,6 +51,14 @@ def get_users():
 @app.route('/posts/<id>', methods=['DELETE'])
 def delete_post(id):
     return 'Hola  se ha borrado el anuncio con id ' + id
+
+@app.route('/images', methods=['GET'])
+def get_images():
+    images = db.get_images()
+    images = [image['images'] for image in images]
+    print(images)
+    labels = VisionAPI().get_image_labels(images)
+    return dumps(labels)
 
 
 @app.route('/posts', methods=['POST'])
