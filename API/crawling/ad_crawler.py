@@ -12,7 +12,7 @@ class AdCrawler(scrapy.Spider):
     hrefs = []
 
     def start_requests(self):
-        with open('urls.txt') as f: f.seek(0)
+        with open('urls.txt','w+') as f: f.seek(0)
         urls = [self.base_url + keyword for keyword in self.search_keywords]
         for url in urls:
             yield scrapy.Request(url=url, callback=self.parse)
@@ -36,6 +36,8 @@ class AdCrawler(scrapy.Spider):
         item_content = Selector(response=response, type='html')\
             .xpath('//div[re:test(@class, "contenido")]').extract()
         data = TextScrapper(item_content[0]).extract_to_json()
+        with open('test.html', 'w') as f:
+            f.write(item_content[0])
         print(data)
 
 
