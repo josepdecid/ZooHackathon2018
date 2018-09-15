@@ -36,12 +36,16 @@ class TextScrapper:
         def get_price():
             return self.get_by_xpath('//*[@id="lote-info"]/div/div[1]/span[1]/span/text()')[0]
 
+        def get_image():
+            image = self.get_by_xpath('//*[@id="foto_principal"]/img/@src')[0]
+            return image
+
         data = {
             'title': get_title(),
             'description': get_description(),
             'date': self.get_by_xpath('//*[@id="info_vendedor_box"]/div[1]/div/div[2]/p[2]/span[2]/text()'),
             'location': self.get_by_xpath('//*[@id="info_vendedor_box"]/div[1]/div/div[2]/p[2]/text()'),
-            'images': self.get_by_xpath('//*[@id="foto_principal"]/img'),
+            'images': get_image(),
             'tags': self.get_by_xpath('/html/body/div/div[1]/div[2]/div/div/div[2]/div/div[2]/div[2]/div/div[1]/div/p[2]/span[2]/em'),
             'price': get_price(),
             'url': '',
