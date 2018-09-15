@@ -54,6 +54,12 @@ class TextScrapper:
             date = [x.rstrip() for x in dates if len(x) > 1][0]
             return date
 
+        def get_user():
+            return {
+                'name': self.get_by_xpath('/html/body/div/div[2]/div/div[3]/div[2]/div/div[1]/div/div[2]/h2/a/strong/text()'),
+                'url': self.get_by_xpath('/html/body/div/div[2]/div/div[3]/div[2]/div/div[1]/div/div[2]/h2/a/@href')
+            }
+
         data = {
             'title': get_title(),
             'description': get_description(),
@@ -63,10 +69,6 @@ class TextScrapper:
             'tags': self.get_by_xpath('/html/body/div/div[1]/div[2]/div/div/div[2]/div/div[2]/div[2]/div/div[1]/div/p[2]/span[2]/em'),
             'price': get_price(),
             'url': '',
-            'user': {
-                'name': '',
-                'profile': '',
-                'extra': {}
-            }
+            'user': get_user()
         }
         return data
