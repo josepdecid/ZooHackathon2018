@@ -98,7 +98,7 @@
                     <form class="d-flex justify-content-center">
                         <!-- Default input -->
                         <input type="search" placeholder="Type your query" aria-label="Search" class="form-control">
-                        <button class="btn btn-primary btn-sm my-0 p" type="submit">
+                        <button class="btn btn-success btn-sm my-0 p" type="submit">
                             <i class="fa fa-search"></i>
                         </button>
 
@@ -109,7 +109,67 @@
             </div>
             <!-- Heading -->
 
+            <!--Grid row-->
+            <div class="row wow fadeIn">
+
+                <!--Grid column-->
+                <div class="col-md-6 mb-4">
+
+                    <!--Card-->
+                    <div class="card">
+
+                        <!--Card content-->
+                        <div class="card-body">
+
+                            <!-- Table  -->
+                            <table id="postTable" class="table table-hover">
+                                <!-- Table head -->
+                                <thead class="green lighten-5">
+                                    <tr>
+                                        <th class="post-title-col">Anuncio</th>
+                                        <th class="post-tags-col"></th>
+                                    </tr>
+                                </thead>
+                                <!-- Table head -->
+
+                                <!-- Table body -->
+                                <tbody></tbody>
+                                <!-- Table body -->
+                            </table>
+                            <!-- Table  -->
+
+                        </div>
+
+                    </div>
+                    <!--/.Card-->
+
+                </div>
+                <!--Grid column-->
+
+                <!--Grid column-->
+                <div class="col-md-6 mb-4">
+
+                    <!--Card-->
+                    <div class="card">
+
+                        <!-- Card header -->
+                        <div class="card-header">Mapa</div>
+
+                        <!--Card content-->
+                        <div class="card-body">
+
+                            <!--Google map-->
+                            <div id="map-container" class="z-depth-1" style="height: 500px"></div>
+
+                        </div>
+
+                    </div>
+                    <!--/.Card-->
+
+                </div>
+                <!--Grid column-->
             
+            </div>
 
         </div>
     </main>
@@ -132,6 +192,8 @@
 
     <!--Google Maps-->
     <script src="https://maps.google.com/maps/api/js"></script>
+
+    <script type="text/javascript" src="js/scripts/main.js"></script>
 </body>
 
 </html>
