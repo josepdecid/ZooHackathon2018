@@ -17,12 +17,25 @@
     .sidebar-fixed .logo-wrapper img {
       max-height: 50px; }
 
-@media (min-width: 1200px) {
+/* @media (min-width: 1200px) {
   .navbar,
   .page-footer,
   main {
-    padding-left: 270px; } }
+    padding-left: 270px; } } */
 
 @media (max-width: 1199.98px) {
   .sidebar-fixed {
     display: none; } }
+
+.tag {
+  margin-left: 5px;
+  margin-bottom: 3px;
+}
+
+.post-title-col {
+  width: 70%;
+}
+
+.post-tags-col {
+  width: 30%;
+}
