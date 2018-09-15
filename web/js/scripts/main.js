@@ -51,29 +51,14 @@ function openModal(postId) {
 }
 
 function loadPosts() {
-    // TEST
-    var posts = [
-        {
-            id: 1,
-            title: 'Tazón de cuerno de rinoceronte',
-            latitude: 38.70,
-            longitude: -3.70,
-            tags: ['RINOCERONTE', 'DECORACION']
-        },
-        {
-            id: 2,
-            title: 'Tigre amaz&oacute;nico',
-            latitude: 40.2,
-            longitude: -1.56,
-            tags: ['TIGRE']
-        }
-    ];
-    // END TEST
 
-    posts.forEach(function (post) {
-        addPostToTable(post);
-        addPostToMap(post);
-    })
+    $.get( "http://localhost:5000/posts", function( posts ) {
+        posts.forEach(function (post) {
+            addPostToTable(post);
+            addPostToMap(post);
+        })
+      });
+ 
 }
 
 google.maps.event.addDomListener(window, 'load', regular_map);
