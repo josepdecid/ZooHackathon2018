@@ -12,4 +12,3 @@ class DBConnection(metaclass=Singleton):
 
     def insert_ads(self, ads):
         self.db.ads.insert_many(ads)
-
