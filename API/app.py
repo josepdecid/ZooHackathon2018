@@ -4,6 +4,9 @@ from flask import Flask, jsonify
 
 from flask_cors import CORS
 
+from crawling.main import start_crawler
+
+
 app = Flask(__name__)
 CORS(app)
 
@@ -39,9 +42,7 @@ def get_posts():
                 'URL': 'url'
             }
 
-        ]
-
-    )
+        ])
 
 
 @app.route('/tags')
@@ -57,10 +58,6 @@ def get_tags():
 
 @app.route('/users')
 def get_users():
-
-    user1 = {
-        'pepe': 'papo'
-    }
 
     return jsonify(
         [
@@ -84,4 +81,5 @@ def delete(id):
 
 
 if __name__ == '__main__':
+    start_crawler()
     app.run()

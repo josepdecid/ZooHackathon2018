@@ -5,13 +5,15 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Material Design Bootstrap</title>
+    <title>Haunted Hunters</title>
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <!-- Material Design Bootstrap -->
     <link href="css/mdb.min.css" rel="stylesheet">
+    <!-- Tags input -->
+    <!-- <link href="css/tagsinput.css" rel="stylesheet"> -->
     <!-- Your custom styles (optional) -->
     <link href="css/style.css" rel="stylesheet">
 </head>
@@ -42,18 +44,10 @@
                     <!-- Left -->
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item active">
-                            <a class="nav-link waves-effect" href="#">Home
-                                <span class="sr-only">(current)</span>
-                            </a>
+                            <a class="nav-link waves-effect" href="#">Anuncios</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link waves-effect" href="https://mdbootstrap.com/material-design-for-bootstrap/" target="_blank">About MDB</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link waves-effect" href="https://mdbootstrap.com/getting-started/" target="_blank">Free download</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link waves-effect" href="https://mdbootstrap.com/bootstrap-tutorial/" target="_blank">Free tutorials</a>
+                            <a class="nav-link waves-effect" href="https://mdbootstrap.com/material-design-for-bootstrap/" target="_blank">Vendedores</a>
                         </li>
                     </ul>
 
@@ -78,24 +72,18 @@
     <!--Main layout-->
     <main class="pt-5 mx-lg-5">
         <div class="container-fluid mt-5">
-
             <!-- Heading -->
             <div class="card mb-4 wow fadeIn">
-
                 <!--Card content-->
                 <div class="card-body justify-content-between">
-
                     <form class="d-flex justify-content-center">
                         <!-- Default input -->
-                        <input type="search" placeholder="Type your query" aria-label="Search" class="form-control">
+                        <input id="tags" type="search" placeholder="Buscar..." aria-label="Search" class="form-control">
                         <button class="btn btn-success btn-sm my-0 p" type="submit">
                             <i class="fa fa-search"></i>
                         </button>
-
                     </form>
-
                 </div>
-
             </div>
             <!-- Heading -->
 
@@ -159,6 +147,60 @@
     </main>
     <!--Main layout-->
 
+    <!--Modal-->
+    <div id="postModal" class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 id="postModal_title" class="modal-title" id="exampleModalLabel"></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                                <ol class="carousel-indicators">
+                                    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                                    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                                    <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+                                </ol>
+                                <div class="carousel-inner">
+                                    <div class="carousel-item active">
+                                        <img class="d-block w-100" src="http://www.quo.es/var/quo/storage/images/tecnologia/internet/las_mejores_senoras_que/212988-1-esl-ES/las_mejores_senoras_que_ampliacion.jpg" alt="First slide">
+                                    </div>
+                                    <div class="carousel-item">
+                                        <img class="d-block w-100" src="http://www.quo.es/var/quo/storage/images/tecnologia/internet/las_mejores_senoras_que/212988-1-esl-ES/las_mejores_senoras_que_ampliacion.jpg" alt="Second slide">
+                                    </div>
+                                    <div class="carousel-item">
+                                        <img class="d-block w-100" src="http://www.quo.es/var/quo/storage/images/tecnologia/internet/las_mejores_senoras_que/212988-1-esl-ES/las_mejores_senoras_que_ampliacion.jpg" alt="Third slide">
+                                    </div>
+                                </div>
+                                <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                    <span class="sr-only">Previous</span>
+                                </a>
+                                <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                    <span class="sr-only">Next</span>
+                                </a>
+                            </div>
+                        </div>
+                        <div id="postModal_body" class="col-md-6">
+
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-light" data-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-danger">Descartar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--Modal-->
+
     <!-- SCRIPTS -->
     <!-- JQuery -->
     <script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
@@ -176,6 +218,10 @@
 
     <!--Google Maps-->
     <script src="https://maps.google.com/maps/api/js"></script>
+    <!--Typeahead-->
+    <script type="text/javascript" src="js/typeahead.bundle.js"></script>
+    <!--Tags input-->
+    <!-- <script type="text/javascript" src="js/tagsinput.js"></script> -->
 
     <script type="text/javascript" src="js/scripts/main.js"></script>
 </body>
