@@ -1,19 +1,78 @@
-from flask import Flask, request
+import json
+
+from flask import Flask, jsonify
 
 from flask_cors import CORS
 
 from crawling.main import start_crawler
-from db import DBConnection
+
 
 app = Flask(__name__)
 CORS(app)
 
-db = DBConnection()
 
-
-@app.route('/posts', methods=['GET'])
+@app.route('/posts')
 def get_posts():
-    return db.get_posts(request)
+    return jsonify(
+        [
+            {
+                'id': 321,
+                'Title': 'vendo cocodrilo',
+                'Description': 'vendo cocodrilo',
+                'Date:"10/09/2010'
+                'Location': json.dumps({'Latitude': 41.3884966, 'Longitude': 41.3884966}),
+                'Images': 'img',
+                'User': json.dumps(
+                    {'name': 'gonredo', 'email': 'gonredo@cazador.es', 'extra': json.dumps(['extra1','extra2'])}),
+                'Categories': json.dumps(['tigre', 'unicornio']),
+                'Price': 9.300,
+                'URL': 'url'
+            },
+            {
+                'id': 322,
+                'Title': 'vendo cocodrilo',
+                'Description': 'vendo cocodrilo',
+                'Date:"10/09/2010'
+                'Location': json.dumps({'Latitude': 41.3884966, 'Longitude': 41.3884966}),
+                'Images': 'img',
+                'User': json.dumps(
+                    {'name': 'juanjo', 'email': 'juanjo@cazador.es', 'extra': json.dumps(['extra1','extra2'])}),
+                'Categories': json.dumps(['tigre']),
+                'Price': 9.300,
+                'URL': 'url'
+            }
+
+        ])
+
+
+@app.route('/tags')
+def get_tags():
+    return jsonify(
+        [
+            'marfil, rino', 'unicornio'
+
+        ]
+
+    )
+
+
+@app.route('/users')
+def get_users():
+
+    return jsonify(
+        [
+            {
+                'name': 'gonredo',
+                'email': 'gonredo@cazador.es',
+                'extra': json.dumps('extra2')},
+            {
+                'name': 'juanjo',
+                'email': 'juanjo@cazador.es',
+                'extra': json.dumps('extra1')}
+
+        ]
+
+    )
 
 
 @app.route('/posts/<id>', methods=['DELETE'])

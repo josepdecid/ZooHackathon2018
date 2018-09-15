@@ -10,5 +10,7 @@ class DBConnection(metaclass=Singleton):
         client = MongoClient()
         self.db = client[db_name]
 
-    def insert_ads(self, ads):
-        self.db.ads.insert_many(ads)
+    def insert_posts(self, posts):
+        self.db.ads.insert_many(posts)
+
+
