@@ -1,11 +1,9 @@
+import requests
 import scrapy
 from scrapy import Selector
 from scrapy.crawler import CrawlerProcess
 
-from db import DBConnection
-from .text_scrapper import TextScrapper
-
-db = DBConnection()
+from text_scrapper import TextScrapper
 
 
 class AdCrawler(scrapy.Spider):
@@ -41,7 +39,7 @@ class AdCrawler(scrapy.Spider):
         item_content = Selector(response=response, type='html')\
             .xpath('//div[re:test(@class, "contenido")]').extract()
         data = TextScrapper(item_content[0]).extract_to_json()
-        db.insert_ads(data)
+        requests.post('http://127.0.0.1:5000/posts', data)
 
 
 process = CrawlerProcess()
