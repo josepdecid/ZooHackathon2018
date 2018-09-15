@@ -47,7 +47,6 @@
     }
 
     window.openModal = function(post) {
-        $('#postModal').modal();
 
         $('#postModal_title').html(post.title);
         $('#postModal_author').html(`<a href='sellers.html?userId=${post.user.id}'>${post.user.name}</a>`);
@@ -74,16 +73,17 @@
         $('#postModal_imagesIndicators').html(imageIndicatorsHtml);
         $('#postModal_images').html(imagesHtml);
         $('#postModal_imagesIndicators > li').first().addClass('active');
-        $('#postModal_images').first().addClass('active');
+        $('#postModal_images > div').first().addClass('active');
         $('#carouselExampleIndicators').carousel();
-    }
+        $('#postModal').modal();
+    };
 
     google.maps.event.addDomListener(window, 'load', regular_map);
 
     $(document).ready(function () {
         var postsDataAccess = new HuntedHaunters.DataAccess.PostsMock();
         postsDataAccess.loadPosts(function(data) {
-            posts = data
+            posts = data;
             posts.forEach(function (post) {
                 addPostToTable(post);
                 addPostToMap(post);
