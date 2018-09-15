@@ -10,7 +10,8 @@ def get_posts():
         title='vendo cocodrilo',
         adress='Inlab B5',
         latitude='41.3884966',
-        longitude='41.3884966'
+        longitude='41.3884966',
+        tags=['marfil','tigre','cocodrilo']
     )
 
 @app.route('/posts/<id>', methods=['DELETE'])
