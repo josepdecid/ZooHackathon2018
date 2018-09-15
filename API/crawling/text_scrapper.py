@@ -3,7 +3,6 @@ from scrapy import Selector
 
 class TextScrapper:
     def __init__(self, text):
-        super().__init__()
         self.text = text
 
     def get_by_xpath(self, xpath):
