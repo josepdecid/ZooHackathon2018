@@ -51,14 +51,12 @@ function openModal(postId) {
 }
 
 function loadPosts() {
-
     $.get( "http://localhost:5000/posts", function( posts ) {
         posts.forEach(function (post) {
             addPostToTable(post);
             addPostToMap(post);
         })
-      });
- 
+    });
 }
 
 google.maps.event.addDomListener(window, 'load', regular_map);
