@@ -1,8 +1,40 @@
 (function() {
     var sellers = [];
 
-    function addSellerToGraph(seller) {
-        // TODO
+    function renderGraph() {
+        var sigmaInstance = new sigma('graphContainer');
+
+        var postIds = sellers.map(function (seller) { return seller.posts; }).flat();
+        postIds.forEach(function(postId) {
+            sigmaInstance.graph.addNode({
+                id: 'post_' + postId,
+                x: Math.random(),
+                y: Math.random(),
+                size: 1,
+                color: '#a00'
+            });
+        });
+
+        sellers.forEach(function(seller) {
+            sigmaInstance.graph.addNode({
+                id: 'seller_' + seller.id,
+                label: seller.name,
+                x: Math.random(),
+                y: Math.random(),
+                size: 2,
+                color: '#f00'
+            });
+
+            seller.posts.forEach(function(postId) {
+                sigmaInstance.graph.addEdge({
+                    id: seller.id + '_' + postId,
+                    source: 'seller_' + seller.id,
+                    target: 'post_' + postId
+                });
+            });
+        });
+
+        sigmaInstance.refresh();
     }
 
     function addSellerToTable(seller) {
@@ -25,11 +57,12 @@
     $(document).ready(function () {
         var authorsDataAccess = new HuntedHaunters.DataAccess.SellersMock();
         authorsDataAccess.loadSellers(function (data) {
-            sellers = data
+            sellers = data;
             sellers.forEach(function (seller) {
                 addSellerToTable(seller);
-                addSellerToGraph(seller);
             })
-        })
+
+            renderGraph();
+        });
     })
 })();
