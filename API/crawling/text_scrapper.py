@@ -5,8 +5,9 @@ from analysis.vision import VisionAPI
 
 
 class TextScrapper:
-    def __init__(self, text):
+    def __init__(self, text, url):
         self.text = text
+        self.url = url
 
     def get_by_xpath(self, xpath):
         return Selector(text=self.text, type='html').xpath(xpath).extract()
@@ -40,8 +41,8 @@ class TextScrapper:
             return self.get_by_xpath('//*[@id="lote-info"]/div/div[1]/span[1]/span/text()')[0]
 
         def get_images():
-            images = self.get_by_xpath('//*[@id="foto_principal"]/img/@src')
-            return images
+            images_url = self.get_by_xpath('//*[@id="foto_principal"]/img/@src')
+            return images_url
 
         def get_location():
             locations = self.get_by_xpath('//*[@id="info_vendedor_box"]/div[1]/div/div[2]/p[2]/text()')
@@ -75,7 +76,7 @@ class TextScrapper:
             'images': images,
             'tags': get_tags(images),
             'price': get_price(),
-            'url': '',
+            'url': self.url,
             'user': get_user()
         }
         return data

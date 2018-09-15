@@ -114,5 +114,15 @@
     return _this;
   };
 
+  HuntedHaunters.DataAccess.GraphMock = function() {
+    var _this = {};
 
+    _this.setGraphData = function(graph) {
+      graph.addNode({
+        id: 'post_1'
+      })
+    };
+
+    return _this;
+  };
 })();
