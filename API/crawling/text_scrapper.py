@@ -41,8 +41,8 @@ class TextScrapper:
             return self.get_by_xpath('//*[@id="lote-info"]/div/div[1]/span[1]/span/text()')[0]
 
         def get_images():
-            images = self.get_by_xpath('//*[@id="foto_principal"]/img/@src')
-            return images
+            images_url = self.get_by_xpath('//*[@id="foto_principal"]/img/@src')
+            return images_url
 
         def get_location():
             locations = self.get_by_xpath('//*[@id="info_vendedor_box"]/div[1]/div/div[2]/p[2]/text()')

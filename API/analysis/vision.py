@@ -18,8 +18,7 @@ class VisionAPI:
         return image_json
 
     def get_image_labels(self, image_urls):
-        # image_urls = ['https://cloud10.todocoleccion.online/arte-etnico/tc/2016/02/14/14/54444149.jpg']
-        json = "{\"requests\": ["  # TODO tratar todas las imagenes y no solo las 16 primeras
+        json = '{"requests": ['
 
         for image_url in image_urls:
             json += self.build_image_json(image_url) + ","
@@ -28,10 +27,11 @@ class VisionAPI:
         r = requests.post(self.build_url(), data=json).json()
 
         total_labels = []
-        for resp in r["responses"]:
+        for resp in r['responses']:
             labels = []
-            if "labelAnnotations" in resp:
-                for label in resp["labelAnnotations"]:
-                    labels.append({"Label": label["description"], "Score": label["score"]})
+            if 'labelAnnotations' in resp:
+                for label in resp['labelAnnotations']:
+                    labels.append(label['description'])
             total_labels.append(labels)
+        total_labels = [item for sublist in total_labels for item in sublist]
         return total_labels
