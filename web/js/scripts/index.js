@@ -36,21 +36,46 @@
         }
 
         var rowHtml = `
-    <tr onclick='openModal(${JSON.stringify(post)})'>
-        <th>${post.title}</th>
-        <td>
-            ${tagsHtml}
-        </td>
-    </tr>
+            <tr onclick='openModal(${JSON.stringify(post)})'>
+                <th>${post.title}</th>
+                <td>
+                    ${tagsHtml}
+                </td>
+            </tr>
         `;
         $("#postTable > tbody:last-child").append(rowHtml);
     }
 
     window.openModal = function(post) {
-        $('#postModal_title').html(post.title);
-        $('#postModal_body').html(post.address); //TODO
-
         $('#postModal').modal();
+
+        $('#postModal_title').html(post.title);
+        $('#postModal_author').html(post.user.name);
+        $('#postModal_price').html(HuntedHaunters.Utils.numberToPrice(post.price));
+        if (post.url)
+            $('#postModal_url').html(`<a href=${post.url}>${post.url}</a>`);
+        $('#postModal_body').html(post.description);
+
+        var imageIndicatorsHtml = '';
+        var imagesHtml = '';
+        post.images.forEach(function(image, index) {
+            var indicatorHtml = `
+                <li data-target="#carouselExampleIndicators" data-slide-to="${index}"></li>
+            `;
+            imageIndicatorsHtml += indicatorHtml;
+
+            var html = `
+                <div class="carousel-item">
+                    <img class="d-block w-100" src="${image}">
+                </div>
+            `;
+            imagesHtml += html;
+        });
+        $('#postModal_imagesIndicators').html(imageIndicatorsHtml);
+        $('#postModal_images').html(imagesHtml);
+        $('#postModal_imagesIndicators > li').first().addClass('active');
+        $('#postModal_images').first().addClass('active');
+        $('#carouselExampleIndicators').carousel();
     }
 
     google.maps.event.addDomListener(window, 'load', regular_map);
