@@ -63,19 +63,19 @@ def get_images():
 
 @app.route('/posts', methods=['POST'])
 def insert_post():
-    json = request.data
+    params = request.data
     post = {
-        "title": json['title'],
-        "description": json['description'],
-        "date": json['date'],
-        "location": [json['location']['latitude'], json['location']['longitude']],
-        "images": [json['title'], json['title']],
+        "title": params['title'],
+        "description": params['description'],
+        "date": params['date'],
+        "location": [params['location']['latitude'], params['location']['longitude']],
+        "images": [params['title'], params['title']],
         "user": {
-            "name": json['title'],
-            "email": json['title'],
+            "name": params['title'],
+            "email": params['title'],
             "extra": []
         },
-        "categories": [1, json['title']],
+        "categories": [1, params['title']],
         "price": 1,
         "url": 1
     }
