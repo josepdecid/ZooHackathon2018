@@ -21,6 +21,7 @@
         {
           id: 1,
           title: 'Vendo Cocodrilo del Nilo',
+          date: new Date('2018/09/08'),
           description: '<p>Vendiendo cocodrilos todos los dias a todas horas</p>',
           images: [
             'https://cloud10.todocoleccion.online/arte-etnico/tc/2016/02/14/14/54444149.jpg',
@@ -41,6 +42,7 @@
         {
           id: 2,
           title: 'Tigre del Amazonas a buen precio',
+          date: new Date('2018/09/10'),
           description: '<p>Tigre con garras de leon, grandes cuernos y orejas de gato.</p><p>Abstenerse graciosos</p>',
           images: [
             'https://cloud10.todocoleccion.online/arte-etnico/tc/2016/02/14/14/54444149.jpg',
@@ -61,6 +63,7 @@
         {
           id: 3,
           title: 'Bol de cuerno de rinoceronte',
+          date: new Date('2018/09/11'),
           description: '<p>Bol artesanal hecho con cuerno autentico de rinoceronte. Con ornamentaciones al estilo Gaudi.</p><p>Precio negociable.</p>',
           images: [
             'https://cloud10.todocoleccion.online/arte-etnico/tc/2016/02/14/14/54444149.jpg',
