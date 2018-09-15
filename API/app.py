@@ -1,48 +1,24 @@
 import json
+from multiprocessing import Process
 
-from flask import Flask, jsonify
-
+from bson.json_util import dumps
+from flask import Flask, request
+from flask import jsonify
 from flask_cors import CORS
 
 from crawling.main import start_crawler
-
+from db import DBConnection
 
 app = Flask(__name__)
 CORS(app)
 
+db = DBConnection()
+
 
 @app.route('/posts')
 def get_posts():
-    return jsonify(
-        [
-            {
-                'id': 321,
-                'Title': 'vendo cocodrilo',
-                'Description': 'vendo cocodrilo',
-                'Date:"10/09/2010'
-                'Location': json.dumps({'Latitude': 41.3884966, 'Longitude': 41.3884966}),
-                'Images': 'img',
-                'User': json.dumps(
-                    {'name': 'gonredo', 'email': 'gonredo@cazador.es', 'extra': json.dumps(['extra1','extra2'])}),
-                'Categories': json.dumps(['tigre', 'unicornio']),
-                'Price': 9.300,
-                'URL': 'url'
-            },
-            {
-                'id': 322,
-                'Title': 'vendo cocodrilo',
-                'Description': 'vendo cocodrilo',
-                'Date:"10/09/2010'
-                'Location': json.dumps({'Latitude': 41.3884966, 'Longitude': 41.3884966}),
-                'Images': 'img',
-                'User': json.dumps(
-                    {'name': 'juanjo', 'email': 'juanjo@cazador.es', 'extra': json.dumps(['extra1','extra2'])}),
-                'Categories': json.dumps(['tigre']),
-                'Price': 9.300,
-                'URL': 'url'
-            }
-
-        ])
+    posts = db.get_posts(request)
+    return dumps(posts)
 
 
 @app.route('/tags')
@@ -81,5 +57,8 @@ def delete(id):
 
 
 if __name__ == '__main__':
-    start_crawler()
+    p = Process(target=start_crawler)
+    p.start()
+    p.join()
+
     app.run()

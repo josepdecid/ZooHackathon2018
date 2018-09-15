@@ -2,7 +2,10 @@ import scrapy
 from scrapy import Selector
 from scrapy.crawler import CrawlerProcess
 
+from db import DBConnection
 from .text_scrapper import TextScrapper
+
+db = DBConnection()
 
 
 class AdCrawler(scrapy.Spider):
@@ -12,7 +15,8 @@ class AdCrawler(scrapy.Spider):
     hrefs = []
 
     def start_requests(self):
-        with open('urls.txt','w+') as f: f.seek(0)
+        with open('urls.txt', 'w+') as f:
+            f.seek(0)
         urls = [self.base_url + keyword for keyword in self.search_keywords]
         for url in urls:
             yield scrapy.Request(url=url, callback=self.parse)
@@ -24,7 +28,7 @@ class AdCrawler(scrapy.Spider):
         items_hrefs = Selector(text=extraction[0], type='html').xpath('//h3//@href').extract()
 
         for ref in items_hrefs:
-            yield scrapy.Request(url='https://www.todocoleccion.net' + ref, callback=self.get_detail)
+            yield scrapy.Request(url='https://www.todocoleccion.net' + ref, callback=AdCrawler.get_detail)
 
         with open('./urls.txt', 'a') as f:
             for el in extraction:
@@ -32,15 +36,14 @@ class AdCrawler(scrapy.Spider):
             for href in self.hrefs:
                 f.write(href + '\n')
 
-    def get_detail(self, response):
+    @staticmethod
+    def get_detail(response):
         item_content = Selector(response=response, type='html')\
             .xpath('//div[re:test(@class, "contenido")]').extract()
         data = TextScrapper(item_content[0]).extract_to_json()
-        with open('test.html', 'w') as f:
-            f.write(item_content[0])
-        print(data)
+        db.insert_ads(data)
 
 
 process = CrawlerProcess()
 process.crawl(AdCrawler)
-process.start()
+process.start(stop_after_crawl=False)
