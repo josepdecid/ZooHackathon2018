@@ -50,10 +50,10 @@
         $('#postModal').modal();
 
         $('#postModal_title').html(post.title);
-        $('#postModal_author').html(post.user.name);
+        $('#postModal_author').html(`<a href='sellers.html?userId=${post.user.id}'>${post.user.name}</a>`);
         $('#postModal_price').html(HuntedHaunters.Utils.numberToPrice(post.price));
         if (post.url)
-            $('#postModal_url').html(`<a href=${post.url}>${post.url}</a>`);
+            $('#postModal_url').html(`<a href='${post.url}'>${post.url}</a>`);
         $('#postModal_body').html(post.description);
 
         var imageIndicatorsHtml = '';

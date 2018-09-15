@@ -63,6 +63,16 @@
             })
 
             renderGraph();
+
+            var userId = URI(window.location).query(true)['userId'];
+            if (typeof userId !== 'undefined' && userId !== null) {
+                var seller = sellers.filter(function(seller) {
+                    return seller.id === parseInt(userId);
+                })[0];
+                if (seller) {
+                    openModal(seller);
+                }
+            }
         });
     })
 })();

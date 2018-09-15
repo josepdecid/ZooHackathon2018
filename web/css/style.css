@@ -53,3 +53,7 @@
 .modal-bold {
   font-weight: bold;
 }
+
+.modal-description {
+  padding: 10px;
+}
