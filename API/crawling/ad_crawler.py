@@ -2,7 +2,7 @@ import scrapy
 from scrapy import Selector
 from scrapy.crawler import CrawlerProcess
 
-from text_scrapper import TextScrapper
+from .text_scrapper import TextScrapper
 
 
 class AdCrawler(scrapy.Spider):

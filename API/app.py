@@ -2,8 +2,8 @@ from flask import Flask, request
 
 from flask_cors import CORS
 
-from API.crawling.main import start_crawler
-from API.db import DBConnection
+from crawling.main import start_crawler
+from db import DBConnection
 
 app = Flask(__name__)
 CORS(app)
