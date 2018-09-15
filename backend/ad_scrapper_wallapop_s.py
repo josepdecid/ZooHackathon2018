@@ -1,7 +1,8 @@
 import scrapy
 from scrapy import Selector
 from scrapy.crawler import CrawlerProcess
-
+import os
+import time
 extra_url = ''
 
 class AdCrawler(scrapy.Spider):
@@ -13,23 +14,34 @@ class AdCrawler(scrapy.Spider):
     def start_requests(self):
         url = self.base_url + self.extra_url
         print("#####################################")
-        print(url)
-        yield scrapy.Request(url=url, callback=self.parse)
-
+        yield scrapy.Request(url=url.rstrip(), callback=self.parse)
     def parse(self, response):
         extraction = Selector(response=response, type='html')\
-            .xpath('//a[re:test(@class, "card-user-detail-top")]').extract()
+            .xpath('//div[re:test(@class, "card-user-detail-top")]').extract()
         for el in extraction:
             #print(el)
             print("---------------------------------------------------")
             chars = el.split('href=\"')
-            print(chars[1])
-            time.sleep(5)
+            iduser = chars[1].split('\"')
+            print(iduser)
 
-
-def crawlSingle(path):
+def ffff(url):
     process = CrawlerProcess()
-    AdCrawler.extra_url=path
-    print(path)
+    AdCrawler.extra_url=url
     process.crawl(AdCrawler)
     process.start()
+
+
+
+def crawlSingle():
+    with open('wallapop-paths.txt') as ff:
+        content = ff.readlines()
+        for url in content:
+            time.sleep(20)
+            newpid = os.fork()
+            if newpid == 0:
+                ffff(url)
+                break;
+
+
+
