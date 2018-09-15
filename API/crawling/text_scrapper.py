@@ -5,8 +5,9 @@ from analysis.vision import VisionAPI
 
 
 class TextScrapper:
-    def __init__(self, text):
+    def __init__(self, text, url):
         self.text = text
+        self.url = url
 
     def get_by_xpath(self, xpath):
         return Selector(text=self.text, type='html').xpath(xpath).extract()
@@ -75,7 +76,7 @@ class TextScrapper:
             'images': images,
             'tags': get_tags(images),
             'price': get_price(),
-            'url': '',
+            'url': self.url,
             'user': get_user()
         }
         return data
