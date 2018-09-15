@@ -1,9 +1,15 @@
 from pymongo import MongoClient
+from .utils import Singleton
 
-client = MongoClient()
-db = client['ZooHack2018']
+db_name = 'ZooHack2018'
 
 
-def insert_ads(ads):
-    ads = db.ads
-    ads.insert_many([])
+class DBConnection(metaclass=Singleton):
+
+    def __init__(self):
+        client = MongoClient()
+        self.db = client[db_name]
+
+    def insert_ads(self, ads):
+        self.db.ads.insert_many(ads)
+
