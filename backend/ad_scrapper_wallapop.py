@@ -57,7 +57,7 @@ newpid = os.fork()
 if newpid == 0:
     execute()
 else:
-    time.sleep(20)
+    time.sleep(10)
     print("#####################################------------------------------------########################")
     crawlSingle()
 

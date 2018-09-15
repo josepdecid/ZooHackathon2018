@@ -23,7 +23,7 @@ class AdCrawler(scrapy.Spider):
             print("---------------------------------------------------")
             chars = el.split('href=\"')
             iduser = chars[1].split('\"')
-            print(iduser)
+            print(iduser[0])
 
 def ffff(url):
     process = CrawlerProcess()
@@ -37,11 +37,14 @@ def crawlSingle():
     with open('wallapop-paths.txt') as ff:
         content = ff.readlines()
         for url in content:
-            time.sleep(20)
+            time.sleep(5)
             newpid = os.fork()
             if newpid == 0:
                 ffff(url)
                 break;
+    if newpid != 0:
+        os.remove('wallapop-paths.txt')
+
 
 
 
