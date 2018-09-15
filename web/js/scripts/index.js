@@ -16,7 +16,7 @@
 
     function addPostToMap(post) {
         var marker = new google.maps.Marker({
-            position: new google.maps.LatLng(post.latitude, post.longitude),
+            position: new google.maps.LatLng(post.location.latitude, post.location.longitude),
             map: map,
             title: post.title
         });
