@@ -1,9 +1,13 @@
-from flask import Flask, request
+import json
+from multiprocessing import Process
 
+from bson.json_util import dumps
+from flask import Flask, request
+from flask import jsonify
 from flask_cors import CORS
 
-from API.crawling.main import start_crawler
-from API.db import DBConnection
+from crawling.main import start_crawler
+from db import DBConnection
 
 app = Flask(__name__)
 CORS(app)
@@ -11,9 +15,40 @@ CORS(app)
 db = DBConnection()
 
 
-@app.route('/posts', methods=['GET'])
+@app.route('/posts')
 def get_posts():
-    return db.get_posts(request)
+    posts = db.get_posts(request)
+    return dumps(posts)
+
+
+@app.route('/tags')
+def get_tags():
+    return jsonify(
+        [
+            'marfil, rino', 'unicornio'
+
+        ]
+
+    )
+
+
+@app.route('/users')
+def get_users():
+
+    return jsonify(
+        [
+            {
+                'name': 'gonredo',
+                'email': 'gonredo@cazador.es',
+                'extra': json.dumps('extra2')},
+            {
+                'name': 'juanjo',
+                'email': 'juanjo@cazador.es',
+                'extra': json.dumps('extra1')}
+
+        ]
+
+    )
 
 
 @app.route('/posts/<id>', methods=['DELETE'])
@@ -22,5 +57,8 @@ def delete(id):
 
 
 if __name__ == '__main__':
-    start_crawler()
+    p = Process(target=start_crawler)
+    p.start()
+    p.join()
+
     app.run()
