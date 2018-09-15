@@ -1,3 +1,5 @@
+
+var posts = [];
 var map = null;
 
 function regular_map() {
@@ -22,7 +24,7 @@ function addPostToMap(post) {
     });
 
     marker.addListener('click', function() {
-        openModal(post.id);
+        openModal(post);
     })
 }
 
@@ -36,7 +38,7 @@ function addPostToTable(post) {
     }
 
     var rowHtml = `
-<tr>
+<tr onclick='openModal(${JSON.stringify(post)})'>
     <th>${post.title}</th>
     <td>
         ${tagsHtml}
@@ -46,12 +48,13 @@ function addPostToTable(post) {
     $("#postTable > tbody:last-child").append(rowHtml);
 }
 
-function openModal(postId) {
-    alert('Marker clicked: ' + postId)
+function openModal(post) {
+    alert('Marker clicked: ' + post.title)
 }
 
 function loadPosts() {
-    $.get( "http://localhost:5000/posts", function( posts ) {
+    $.get( "http://localhost:5000/posts", function( data ) {
+        posts = data
         posts.forEach(function (post) {
             addPostToTable(post);
             addPostToMap(post);
