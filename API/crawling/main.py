@@ -1,15 +1,13 @@
 import atexit
-import requests
 
+from crawler_todocolecciones import AdCrawler as CrawlerTodoColecciones
 from apscheduler.schedulers.background import BackgroundScheduler
 from scrapy.crawler import CrawlerProcess
-
-from ad_crawler import AdCrawler
 
 
 def start_crawler():
     process = CrawlerProcess()
-    process.crawl(AdCrawler)
+    process.crawl(CrawlerTodoColecciones)
     process.start()
 
     scheduler = BackgroundScheduler()
