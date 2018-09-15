@@ -1,9 +1,13 @@
 from scrapy import Selector
+from geopy.geocoders import Nominatim
+
+from analysis.vision import VisionAPI
 
 
 class TextScrapper:
-    def __init__(self, text):
+    def __init__(self, text, url):
         self.text = text
+        self.url = url
 
     def get_by_xpath(self, xpath):
         return Selector(text=self.text, type='html').xpath(xpath).extract()
@@ -36,19 +40,43 @@ class TextScrapper:
         def get_price():
             return self.get_by_xpath('//*[@id="lote-info"]/div/div[1]/span[1]/span/text()')[0]
 
+        def get_images():
+            images_url = self.get_by_xpath('//*[@id="foto_principal"]/img/@src')
+            return images_url
+
+        def get_location():
+            locations = self.get_by_xpath('//*[@id="info_vendedor_box"]/div[1]/div/div[2]/p[2]/text()')
+            loc = [x.rstrip() for x in locations if len(x) > 1][0]
+            geolocator = Nominatim(user_agent="HauntedHauters")
+            location = geolocator.geocode(loc)
+            lat_lng = [location.latitude, location.longitude]
+            return lat_lng
+
+        def get_date():
+            dates = self.get_by_xpath('//*[@id="info_vendedor_box"]/div[1]/div/div[2]/p[2]/span[2]/text()')
+            date = [x.rstrip() for x in dates if len(x) > 1][0]
+            return date
+
+        def get_tags(image_urls):
+            return VisionAPI().get_image_labels(image_urls)
+
+        def get_user():
+            return {
+                'name': self.get_by_xpath('/html/body/div/div[2]/div/div[3]/div[2]/div/div[1]/div/div[2]/h2/a/strong/text()'),
+                'url': self.get_by_xpath('/html/body/div/div[2]/div/div[3]/div[2]/div/div[1]/div/div[2]/h2/a/@href')
+            }
+
+        images = get_images()
+
         data = {
             'title': get_title(),
             'description': get_description(),
-            'date': self.get_by_xpath('//*[@id="info_vendedor_box"]/div[1]/div/div[2]/p[2]/span[2]/text()'),
-            'location': self.get_by_xpath('//*[@id="info_vendedor_box"]/div[1]/div/div[2]/p[2]/text()'),
-            'images': self.get_by_xpath('//*[@id="foto_principal"]/img'),
-            'tags': self.get_by_xpath('/html/body/div/div[1]/div[2]/div/div/div[2]/div/div[2]/div[2]/div/div[1]/div/p[2]/span[2]/em'),
+            'date': get_date(),
+            'location': get_location(),
+            'images': images,
+            'tags': get_tags(images),
             'price': get_price(),
-            'url': '',
-            'user': {
-                'name': '',
-                'profile': '',
-                'extra': {}
-            }
+            'url': self.url,
+            'user': get_user()
         }
         return data

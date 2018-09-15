@@ -20,19 +20,66 @@
       callback([
         {
           id: 1,
-          title: 'vendo cocodrilos',
-          address: 'InLab',
-          latitude: 48.2,
-          longitude: 2.13,
-          tags: ['cocodrilo', 'salvaje']
+          title: 'Vendo Cocodrilo del Nilo',
+          date: new Date('2018/09/08'),
+          description: '<p>Vendiendo cocodrilos todos los dias a todas horas</p>',
+          images: [
+            'https://cloud10.todocoleccion.online/arte-etnico/tc/2016/02/14/14/54444149.jpg',
+            'https://cloud10.todocoleccion.online/arte-etnico/tc/2016/02/14/14/54444149.jpg'
+          ],
+          location: {
+            latitude: 48.2,
+            longitude: 2.13
+          },
+          tags: ['africa', 'cocodrilo', 'salvaje', 'egipto'],
+          price: 6880,
+          url: 'https://www.youtube.com/',
+          user: {
+            id: 1,
+            name: 'Gisela Ruzafa'
+          }
         },
         {
           id: 2,
-          title: 'vendo unicornio',
-          address: 'InLab FIB',
-          latitude: 49.1,
-          longitude: 2.78,
-          tags: ['especial', 'unicornio', 'salvaje']
+          title: 'Tigre del Amazonas a buen precio',
+          date: new Date('2018/09/10'),
+          description: '<p>Tigre con garras de leon, grandes cuernos y orejas de gato.</p><p>Abstenerse graciosos</p>',
+          images: [
+            'https://cloud10.todocoleccion.online/arte-etnico/tc/2016/02/14/14/54444149.jpg',
+            'https://cloud10.todocoleccion.online/arte-etnico/tc/2016/02/14/14/54444149.jpg'
+          ],
+          location: {
+            latitude: 43.2,
+            longitude: 2.77
+          },
+          tags: ['tigre', 'amazonas', 'salvaje'],
+          price: 15677,
+          url: 'https://www.facebook.com/',
+          user: {
+            id: 1,
+            name: 'Gisela Ruzafa'
+          }
+        },
+        {
+          id: 3,
+          title: 'Bol de cuerno de rinoceronte',
+          date: new Date('2018/09/11'),
+          description: '<p>Bol artesanal hecho con cuerno autentico de rinoceronte. Con ornamentaciones al estilo Gaudi.</p><p>Precio negociable.</p>',
+          images: [
+            'https://cloud10.todocoleccion.online/arte-etnico/tc/2016/02/14/14/54444149.jpg',
+            'https://cloud10.todocoleccion.online/arte-etnico/tc/2016/02/14/14/54444149.jpg'
+          ],
+          location: {
+            latitude: 12.67,
+            longitude: 12.56
+          },
+          tags: ['rinoceronte', 'decoracion', 'pieza'],
+          price: 345,
+          url: 'https://www.google.com',
+          user: {
+            id: 2,
+            name: 'Sergio'
+          }
         }
       ]);
     }
@@ -62,6 +109,18 @@
           posts: [3]
         }
       ]);
+    };
+
+    return _this;
+  };
+
+  HuntedHaunters.DataAccess.GraphMock = function() {
+    var _this = {};
+
+    _this.setGraphData = function(graph) {
+      graph.addNode({
+        id: 'post_1'
+      })
     };
 
     return _this;

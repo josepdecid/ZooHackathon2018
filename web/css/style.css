@@ -45,3 +45,11 @@
   height: 300px;
   margin: auto;
 }
+
+.modal-bold {
+  font-weight: bold;
+}
+
+.modal-description {
+  padding: 10px;
+}

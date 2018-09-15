@@ -30,3 +30,6 @@ class DBConnection(metaclass=Singleton):
 
     def get_posts(self, filters):
         return self.db.ads.find()
+
+    def get_images(self):
+        return self.db.ads.find({}, {'images': 1}).limit(16)
