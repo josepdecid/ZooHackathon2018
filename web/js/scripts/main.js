@@ -15,8 +15,6 @@ function regular_map() {
 }
 
 function addPostToMap(post) {
-    console.log(map);
-    console.log(post);
     var marker = new google.maps.Marker({
         position: new google.maps.LatLng(post.latitude, post.longitude),
         map: map,
@@ -49,7 +47,10 @@ function addPostToTable(post) {
 }
 
 function openModal(post) {
-    alert('Marker clicked: ' + post.title)
+    $('#postModal_title').html(post.title);
+    $('#postModal_body').html(post.address); //TODO
+
+    $('#postModal').modal();
 }
 
 function loadPosts() {
