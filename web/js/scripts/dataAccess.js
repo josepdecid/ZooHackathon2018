@@ -118,8 +118,109 @@
     var _this = {};
 
     _this.setGraphData = function(graph) {
+      addNodes(graph);
+      addEdges(graph);
+    };
+
+    var addNodes = function(graph) {
+      var color = '#f00';
+
       graph.addNode({
-        id: 'post_1'
+        id: 'n1',
+        label: 'dani344',
+        x: 0.15,
+        y: 0.45,
+        size: 2,
+        color: color
+      }).addNode({
+        id: 'n2',
+        label: 'x_cazador_x',
+        x: 0.9,
+        y: 0.05,
+        size: 2,
+        color: color
+      }).addNode({
+        id: 'n3',
+        label: '0908_javi',
+        x: 0.7,
+        y: 0.4,
+        size: 2,
+        color: color
+      }).addNode({
+        id: 'n4',
+        label: 'nicolas_cage',
+        x: 0.55,
+        y: 0.78,
+        size: 2,
+        color: color
+      }).addNode({
+        id: 'n5',
+        label: 'rhinobrother99',
+        x: 0.6,
+        y: 0.3,
+        size: 2,
+        color: color
+      }).addNode({
+        id: 'n6',
+        label: 'the_killer',
+        x: 0.02,
+        y: 0.1,
+        size: 2,
+        color: color
+      }).addNode({
+        id: 'n7',
+        label: 'Gistonic',
+        x: 0.45,
+        y: 0.66,
+        size: 2,
+        color: color
+      }).addNode({
+        id: 'n8',
+        label: 'Sergio',
+        x: 0.48,
+        y: 0.9,
+        size: 2,
+        color: color
+      });
+    };
+
+    var addEdges = function(graph) {
+      graph.addEdge({
+        id: 'e1',
+        source: 'n1',
+        target: 'n6'
+      }).addEdge({
+        id: 'e2',
+        source: 'n1',
+        target: 'n7'
+      }).addEdge({
+        id: 'e3',
+        source: 'n1',
+        target: 'n5'
+      }).addEdge({
+        id: 'e4',
+        source: 'n3',
+        target: 'n7'
+      }).addEdge({
+        id: 'e5',
+        source: 'n4',
+        target: 'n7'
+      }).addEdge({
+        id: 'e6',
+        source: 'n5',
+        target: 'n7'
+      }).addEdge({
+        id: 'e7',
+        source: 'n4',
+        target: 'n8'
+      }).addEdge({
+        id: 'e8',
+        source: 'n2',
+        target: 'n3'
+      }).addEdge({
+        id: 'e9',
+        source: 'n2',
+        target: 'n5'
       })
     };
 
