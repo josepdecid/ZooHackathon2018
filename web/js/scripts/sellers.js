@@ -23,7 +23,7 @@
         var rowHtml = `
             <tr onclick='openModal(${JSON.stringify(seller)})'>
                 <th>${seller.name}</th>
-                <td>${seller}</td>
+                <td>${seller.posts.length}</td>
             </tr>
         `;
         $("#sellerTable > tbody:last-child").append(rowHtml);
@@ -78,6 +78,9 @@
         var authorsDataAccess = new HuntedHaunters.DataAccess.Sellers();
         authorsDataAccess.loadSellers(function (data) {
             sellers = JSON.parse(data);
+            sellers.sort(function (a, b) {
+                return a.posts.length < b.posts.length
+            });
             sellers.forEach(function (seller) {
                 addSellerToTable(seller);
             });
