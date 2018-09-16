@@ -12,8 +12,6 @@
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <!-- Material Design Bootstrap -->
     <link href="css/mdb.min.css" rel="stylesheet">
-    <!-- Tags input -->
-    <!-- <link href="css/tagsinput.css" rel="stylesheet"> -->
     <!-- Your custom styles (optional) -->
     <link href="css/style.css" rel="stylesheet">
 </head>
@@ -132,6 +130,7 @@
                         <div class="col-md-12">
                             <!--Card-->
                             <div class="card">
+                                <div class="card-header">Etiquetas</div>
                                 <!--Card content-->
                                 <div class="card-body">
                                     <canvas id="tagsChart"></canvas>
@@ -148,11 +147,11 @@
     <!--Main layout-->
 
     <!--Modal-->
-    <div id="postModal" class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div id="postModal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 id="postModal_title" class="modal-title" id="exampleModalLabel"></h5>
+                    <h5 id="postModal_title" class="modal-title"></h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -224,10 +223,6 @@
 
     <!--Google Maps-->
     <script src="https://maps.google.com/maps/api/js"></script>
-    <!--Typeahead-->
-    <script type="text/javascript" src="js/typeahead.bundle.js"></script>
-    <!--Tags input-->
-    <!-- <script type="text/javascript" src="js/tagsinput.js"></script> -->
 
     <script type="text/javascript" src="js/scripts/utils.js"></script>
     <script type="text/javascript" src="js/scripts/dataAccess.js"></script>

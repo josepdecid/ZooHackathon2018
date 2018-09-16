@@ -15,10 +15,9 @@
 
         var postsDataAccess = new HuntedHaunters.DataAccess.PostsMock();
         postsDataAccess.loadPosts(function(data) {
-            data.sort(function(a, b) {
+            posts = data.sort(function(a, b) {
                 return a.date < b.date;
             });
-            posts = data;
             posts.forEach(function (post) {
                 addPostToTable(post);
                 addPostToMap(post);
@@ -73,17 +72,15 @@
         var imageIndicatorsHtml = '';
         var imagesHtml = '';
         post.images.forEach(function(image, index) {
-            var indicatorHtml = `
+            imageIndicatorsHtml += `
                 <li data-target="#carouselExampleIndicators" data-slide-to="${index}"></li>
             `;
-            imageIndicatorsHtml += indicatorHtml;
 
-            var html = `
+            imagesHtml += `
                 <div class="carousel-item">
                     <img class="d-block w-100" src="${image}">
                 </div>
             `;
-            imagesHtml += html;
         });
         $('#postModal_imagesIndicators').html(imageIndicatorsHtml);
         $('#postModal_images').html(imagesHtml);
@@ -111,7 +108,15 @@
                 }
             });
         });
-        tags.sort(function(tag1, tag2) { return tag1.count <= tag2.count});
+        tags = tags.sort(function(tag1, tag2) {
+            console.log(tag1);
+            console.log(tag2);
+            if (tag1.count > tag2.count)
+                return -1;
+            if (tag1.count < tag2.count)
+                return 1;
+            return 0;
+        });
         tags = tags.slice(0, 5);
 
         var ctx = document.getElementById("tagsChart").getContext('2d');
