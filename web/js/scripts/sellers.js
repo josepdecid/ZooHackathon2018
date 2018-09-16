@@ -153,7 +153,7 @@
             var userId = URI(window.location).query(true)['userId'];
             if (typeof userId !== 'undefined' && userId !== null) {
                 var seller = sellers.filter(function (seller) {
-                    return seller.id === parseInt(userId);
+                    return seller._id === parseInt(userId);
                 })[0];
                 if (seller) {
                     openModal(seller);
@@ -165,7 +165,6 @@
                 if (typeof filter !== 'undefined' && filter !== null
                         && filterNotEmpty(filter)) {
                     
-                    console.log(filter);
                     filterSellers(filter);
                 } else {
                     filterSeller(null);
