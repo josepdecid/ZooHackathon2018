@@ -13,7 +13,7 @@ db = DBConnection()
 
 @app.route('/posts')
 def get_posts():
-    posts = db.get_posts(request)
+    posts = db.get_posts(request.args.get('tags', []))
     return dumps(posts)
 
 
