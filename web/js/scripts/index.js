@@ -1,6 +1,7 @@
 (function() {
     var posts = [];
     var map = null;
+    var markers = [];
 
     function regular_map() {
         var location = new google.maps.LatLng(40.42, -3.70);
@@ -18,36 +19,74 @@
             posts = data.sort(function(a, b) {
                 return a.date < b.date;
             });
-            posts.forEach(function (post) {
-                addPostToTable(post);
-                addPostToMap(post);
-            });
+            filterPosts(null);
 
             loadTagsChart();
-        });
 
-        var tags = [];
-        posts.forEach(function(post) {
-            post.tags.forEach(function(tag) {
-                var existingTag = tags.filter(function(existingTag) {
-                    return existingTag.name === tag
-                })[0];
+            var tags = [];
+            posts.forEach(function(post) {
+                post.tags.forEach(function(tag) {
+                    var existingTag = tags.filter(function(existingTag) {
+                        return existingTag === tag
+                    })[0];
 
-                if (!existingTag) {
-                    tags.push(tag);
-                }
+                    if (!existingTag) {
+                        tags.push(tag);
+                    }
+                });
+            });
+
+            $('#tags').tokenfield({
+                autocomplete: {
+                    source: tags,
+                    delay: 100,
+                    minLength: 1
+                },
+                showAutocompleteOnFocus: true
             });
         });
 
-        $('#tags').tokenfield({
-            autocomplete: {
-                source: tags,
-                delay: 100,
-                minLength: 1
-            },
-            showAutocompleteOnFocus: true,
-        })
-    }
+        $('#searchForm').on('submit', function (e) {
+            var tagsValue = $('#tags')[0].value;
+            var tagsFiltered = [];
+            if (tagsValue) {
+                tagsFiltered = tagsValue.split(', ');
+            }
+            filterPosts(tagsFiltered);
+            return false;
+        });
+    };
+
+    function filterPosts(tagsFiltered) {
+        resetDashboard();
+        
+        var postsFiltered = [];
+        if (tagsFiltered && tagsFiltered.length > 0) {
+            postsFiltered = posts.filter(function(post) {
+                var exists = true;
+                tagsFiltered.forEach(function(tag) {
+                    var found = post.tags.indexOf(tag) !== -1;
+                    if (!found) exists = false;
+                });
+                return exists;
+            });
+        } else {
+            postsFiltered = posts;
+        }
+        postsFiltered.forEach(function (post) {
+            addPostToTable(post);
+            addPostToMap(post);
+        });
+    };
+
+    function resetDashboard() {
+        markers.forEach(function(marker) {
+            marker.setMap(null);
+        });
+        markers = [];
+
+        $('#postTable > tbody').html('');
+    };
 
     function addPostToMap(post) {
         var marker = new google.maps.Marker({
@@ -59,10 +98,11 @@
         marker.addListener('click', function() {
             openModal(post);
         })
+
+        markers.push(marker);
     }
 
     function addPostToTable(post) {
-
         var tagsHtml = '';
         if (post.tags) {
             post.tags.forEach(function (tag) {
