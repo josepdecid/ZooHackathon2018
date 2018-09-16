@@ -4,7 +4,6 @@
     function onClickNode(event) {
         // MOCK
         var seller = sellers[0];
-        console.log(seller);
         openModal(seller);
     };
 
@@ -34,43 +33,46 @@
         $('#sellerModal_body').html(seller.posts.length); //TODO
         $('#sellerModal_location').html(seller.location);
 
+        var postsIDs = '';
         seller.posts.forEach(function (postId) {
+            postsIDs += (postId.$oid + ',');
         });
+        postsIDs = postsIDs.slice(0, -1);
+        addPostsToModalList(postsIDs);
 
         $('#sellerModal').modal();
     }
 
-    function addPostToModalList(postId) {
-        console.log(postId);
-        var postsDataAccess = new HuntedHaunters.DataAccess.SellersMock();
-        var rowHtml = `
-            <tr onclick='openModal(${JSON.stringify(post)})'>
-                <th>
-                    <div class="image-cropper" style="
-                        width: 100px;
-                        height:100px;
-                        position: relative;
-                        overflow: hidden;
-                        border-radius: 50%;
-                    ">
-                        <img src=${post.images[0]} width=110px style="
-                         display: inline;
-                        margin: auto;
-                        height: 100%;
-                        width: 100%; " class="rounded">
-                    </div>
-                </th>
-                <th>${post.title}</th>
-                <td>
-                    ${tagsHtml}
-                </td>
-                <td>
-                    <h6>${post.price}€</h6>
-                </td>
-
-            </tr>
-        `;
-        $("#postAuthorTable > tbody:last-child").append(rowHtml);
+    function addPostsToModalList(postsIDs) {
+        var postsDataAccess = new HuntedHaunters.DataAccess.SellerPosts(postsIDs);
+        postsDataAccess.loadPosts(function (data) {
+            data.forEach(function (post) {
+                var rowHtml = `
+                <tr onclick='openModal(${JSON.stringify(post)})'>
+                    <th>
+                        <div class="image-cropper" style="
+                            width: 100px;
+                            height:100px;
+                            position: relative;
+                            overflow: hidden;
+                            border-radius: 50%;
+                        ">
+                            <img src=${post.images[0]} width=110px style="
+                             display: inline;
+                            margin: auto;
+                            height: 100%;
+                            width: 100%; " class="rounded">
+                        </div>
+                    </th>
+                    <th>${post.title}</th>
+                    <td>
+                        <h6>${post.price}€</h6>
+                    </td>
+    
+                </tr>`;
+                $("#postAuthorTable > tbody:last-child").append(rowHtml);
+            });
+        });
     }
 
     $(document).ready(function () {

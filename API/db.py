@@ -43,8 +43,8 @@ class DBConnection(metaclass=Singleton):
     def get_users(self):
         return self.db.users.find()
 
-    def get_user_posts(self, id):
-        self.db.users.find({'_id': id})
+    def get_user_posts(self, ids):
+        return self.db.posts.find({'_id': {'$in': ids}})
 
     def get_images(self):
         return self.db.ads.find({}, {'images': 1}).limit(16)

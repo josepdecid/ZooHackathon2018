@@ -1,3 +1,4 @@
+from bson import ObjectId
 from bson.json_util import dumps, loads
 from flask import Flask, request
 from flask_cors import CORS
@@ -22,9 +23,13 @@ def get_users():
     users = db.get_users()
     return dumps(users)
 
-@app.route('/users/<user_id>', methods=['GET'])
+
+@app.route('/user_posts', methods=['GET'])
 def get_posts_by_user():
-    posts = db.get_user_posts(request.args.get('id'))
+    ids = request.args.get('ids')
+    ids = ids[1:-1].split(',')
+    ids = list(map(lambda post_id: ObjectId(post_id), ids))
+    posts = db.get_user_posts(ids)
     return dumps(posts)
 
 
