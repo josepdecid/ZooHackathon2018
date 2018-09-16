@@ -1,3 +1,5 @@
+import copy
+
 from pymongo import MongoClient
 from utils import Singleton
 
@@ -11,22 +13,23 @@ class DBConnection(metaclass=Singleton):
         self.db = client[db_name]
 
     def insert_posts(self, posts):
-        self.db.posts.insert_many(posts)
+        print(posts)
+        post_id = self.db.posts.insert_many(posts)
+        posts_id = post_id.inserted_ids
         users = self.db["users"]
-        for x in posts:
-            user_find = users.find({"_id": x.user.id})
-            if user_find.count == 0:
-                x.user.posts = [x.id]
-                self.db.users.insert(x.user)
+        for x, y in zip(posts, posts_id):
+            user_find = users.find({"_id": x['user']['_id']})
+            if user_find.count() == 0:
+                x['user']['posts'] = [y]
+                self.db.users.insert(x['user'])
             else:
-                x.user.posts.append(x.id)
-                self.db.users.update_one({"posts": x.user.posts})
+                user_find[0]['posts'].append(y)
+                gigi = copy.deepcopy(user_find[0]['posts'])
+                gigi.append(y)
+                self.db.users.update_one({"_id": user_find[0]['_id']},{"$set":{"posts": gigi}})
 
     def delete_post(self, id):
         self.db.posts.delete_one({"_id": id})
-
-    def insert_ads(self, ads):
-        self.db.ads.insert_one(ads)
 
     def get_posts(self, filters):
         return self.db.ads.find()
