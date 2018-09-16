@@ -1,4 +1,5 @@
 import copy
+from datetime import datetime
 
 from bson import ObjectId
 from pymongo import MongoClient
@@ -15,12 +16,13 @@ class DBConnection(metaclass=Singleton):
         self.db = client[db_name]
 
     def insert_posts(self, posts):
-        print(posts)
         post_id = self.db.posts.insert_many(posts)
         posts_id = post_id.inserted_ids
         users = self.db["users"]
         for x, y in zip(posts, posts_id):
             user_find = users.find({"_id": x['user']['_id']})
+            day, month, year = x['date'].split('/')
+            x['date'] = datetime(int(year), int(month), int(day))
             if user_find.count() == 0:
                 x['user']['posts'] = [y]
                 self.db.users.insert(x['user'])

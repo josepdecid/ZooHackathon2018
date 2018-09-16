@@ -98,6 +98,7 @@
                     <td>
                         <h6>${post.price}€</h6>
                     </td>
+                    <td><h6>${post.date}</h6><td>
     
                 </tr>`;
                 $("#postAuthorTable > tbody:last-child").append(rowHtml);
