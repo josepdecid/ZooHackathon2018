@@ -1,12 +1,9 @@
-import json
-
 from bson.json_util import dumps, loads
 from flask import Flask, request
-from flask import jsonify
 from flask_cors import CORS
 
-from db import DBConnection
 from analysis.vision import VisionAPI
+from db import DBConnection
 
 app = Flask(__name__)
 CORS(app)
@@ -16,41 +13,21 @@ db = DBConnection()
 
 @app.route('/posts')
 def get_posts():
-    posts = db.get_posts(request)
+    posts = db.get_posts(request.args.get('tags', []))
     return dumps(posts)
-
-
-@app.route('/tags')
-def get_tags():
-    return jsonify(
-        [
-            'marfil, rino', 'unicornio'
-        ]
-
-    )
 
 
 @app.route('/users')
 def get_users():
-    return jsonify(
-        [
-            {
-                'name': 'gonredo',
-                'email': 'gonredo@cazador.es',
-                'extra': json.dumps('extra2')},
-            {
-                'name': 'juanjo',
-                'email': 'juanjo@cazador.es',
-                'extra': json.dumps('extra1')}
-
-        ]
-
-    )
+    users = db.get_users()
+    return dumps(users)
 
 
-@app.route('/posts/<id>', methods=['DELETE'])
-def delete_post(id):
-    return 'Hola  se ha borrado el anuncio con id ' + id
+@app.route('/posts/<post_id>', methods=['DELETE'])
+def delete_post(post_id):
+    db.delete_post(post_id)
+    return "", 201
+
 
 @app.route('/images', methods=['GET'])
 def get_images():

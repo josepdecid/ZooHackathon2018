@@ -7,6 +7,7 @@ from text_scrapper import TextScrapper
 
 headers = {'Content-Type': 'application/json', 'Accept':'application/json'}
 
+
 class AdCrawler(scrapy.Spider):
     name = 'TodoColección'
     base_url = 'https://www.todocoleccion.net/app/buscador?O=mas&bu='
@@ -40,7 +41,7 @@ class AdCrawler(scrapy.Spider):
         item_content = Selector(response=response, type='html')\
             .xpath('//div[re:test(@class, "contenido")]').extract()
         data = TextScrapper(item_content[0], response.url).extract_to_json()
-        requests.post('http://127.0.0.1:5000/posts', json=[data], headers=headers)
+        requests.post('http://46.101.56.168:8080/posts', json=[data], headers=headers)
 
 
 process = CrawlerProcess()

@@ -112,10 +112,29 @@
 
         var rowHtml = `
             <tr onclick='openModal(${JSON.stringify(post)})'>
+                <th>
+                    <div class="image-cropper" style="
+                        width: 100px;
+                        height:100px;
+                        position: relative;
+                        overflow: hidden;
+                        border-radius: 50%;
+                    ">
+                        <img src=${post.images[0]} width=110px style="
+                         display: inline;
+                        margin: auto;
+                        height: 100%;
+                        width: 100%; " class="rounded">
+                    </div>
+                </th>
                 <th>${post.title}</th>
                 <td>
                     ${tagsHtml}
                 </td>
+                <td>
+                    <h6>${post.price}€</h6>
+                </td>
+
             </tr>
         `;
         $("#postTable > tbody:last-child").append(rowHtml);
@@ -124,7 +143,8 @@
     window.openModal = function(post) {
 
         $('#postModal_title').html(post.title);
-        $('#postModal_date').html(`${new Date(post.date).getFullYear()}/${new Date(post.date).getMonth()}/${new Date(post.date).getDate()}`);
+        //$('#postModal_date').html(`${new Date(post.date).getFullYear()}/${new Date(post.date).getMonth()}/${new Date(post.date).getDate()}`);
+        $('#postModal_date').html(`${post.date}`);
         $('#postModal_author').html(`<a href='sellers.html?userId=${post.user.id}'>${post.user.name}</a>`);
         $('#postModal_price').html(HuntedHaunters.Utils.numberToPrice(post.price));
         if (post.url)
