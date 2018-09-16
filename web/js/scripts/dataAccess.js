@@ -27,10 +27,7 @@
             'https://cloud10.todocoleccion.online/arte-etnico/tc/2016/02/14/14/54444149.jpg',
             'https://cloud10.todocoleccion.online/arte-etnico/tc/2016/02/14/14/54444149.jpg'
           ],
-          location: {
-            latitude: 48.2,
-            longitude: 2.13
-          },
+          location: [48.2, 2.13],
           tags: ['africa', 'cocodrilo', 'salvaje', 'egipto'],
           price: 6880,
           url: 'https://www.youtube.com/',
@@ -48,10 +45,7 @@
             'https://cloud10.todocoleccion.online/arte-etnico/tc/2016/02/14/14/54444149.jpg',
             'https://cloud10.todocoleccion.online/arte-etnico/tc/2016/02/14/14/54444149.jpg'
           ],
-          location: {
-            latitude: 43.2,
-            longitude: 2.77
-          },
+          location: [22.4, 2.77],
           tags: ['tigre', 'amazonas', 'salvaje'],
           price: 15677,
           url: 'https://www.facebook.com/',
@@ -69,16 +63,103 @@
             'https://cloud10.todocoleccion.online/arte-etnico/tc/2016/02/14/14/54444149.jpg',
             'https://cloud10.todocoleccion.online/arte-etnico/tc/2016/02/14/14/54444149.jpg'
           ],
-          location: {
-            latitude: 12.67,
-            longitude: 12.56
-          },
+          location: [12.67, 12.56],
           tags: ['rinoceronte', 'decoracion', 'pieza'],
           price: 345,
           url: 'https://www.google.com',
           user: {
             id: 2,
             name: 'Sergio'
+          }
+        },
+        {
+          id: 4,
+          title: 'Pájaro exótico',
+          date: new Date('2018/09/05'),
+          description: '<p>Pájaro exótico. No se que especie es, pero parece muy caro</p>',
+          images: [
+            'https://cloud10.todocoleccion.online/arte-etnico/tc/2016/02/14/14/54444149.jpg',
+            'https://cloud10.todocoleccion.online/arte-etnico/tc/2016/02/14/14/54444149.jpg'
+          ],
+          location: [-24.22, -56.3],
+          tags: ['pajaro', 'salvaje'],
+          price: 20444,
+          url: 'https://www.google.com',
+          user: {
+            id: 1,
+            name: 'Gistonic'
+          }
+        },
+        {
+          id: 5,
+          title: 'Dientes de marfil de elefante',
+          date: new Date('2018/08/11'),
+          description: '<p>Dientes de marfil de elefante, perfecto para pianos y marmoles de marfil de la cocina.</p>',
+          images: [
+            'https://cloud10.todocoleccion.online/arte-etnico/tc/2016/02/14/14/54444149.jpg',
+            'https://cloud10.todocoleccion.online/arte-etnico/tc/2016/02/14/14/54444149.jpg'
+          ],
+          location: [-1.99, 13.2],
+          tags: ['marfil', 'elefante', 'pieza', 'salvaje', 'decoracion'],
+          price: 2566,
+          url: 'https://www.google.com',
+          user: {
+            id: 2,
+            name: 'Sergio'
+          }
+        },
+        {
+          id: 6,
+          title: 'Bueyes vivos',
+          date: new Date('2018/08/09'),
+          description: '<p>El otro día encontré 200 bueyes en el jardín y no se que hacer con ellos.</p><p>POR FAVOR, QUE ALGUIEN SE LOS LLEVE.</p>',
+          images: [
+            'https://cloud10.todocoleccion.online/arte-etnico/tc/2016/02/14/14/54444149.jpg',
+            'https://cloud10.todocoleccion.online/arte-etnico/tc/2016/02/14/14/54444149.jpg'
+          ],
+          location: [56.2, 120.3],
+          tags: ['buey', 'salvaje', 'jardin'],
+          price: 0,
+          url: 'https://www.google.com',
+          user: {
+            id: 2,
+            name: 'Sergio'
+          }
+        },
+        {
+          id: 7,
+          title: 'Copa de ébano',
+          date: new Date('2018/06/21'),
+          description: '<p>Ébano, ébano... No recuerdo que és. Era algo de los elfos, no?</p>',
+          images: [
+            'https://cloud10.todocoleccion.online/arte-etnico/tc/2016/02/14/14/54444149.jpg',
+            'https://cloud10.todocoleccion.online/arte-etnico/tc/2016/02/14/14/54444149.jpg'
+          ],
+          location: [44.2, 2.2],
+          tags: ['ebano', 'decoracion', 'pieza'],
+          price: 5000,
+          url: 'https://www.google.com',
+          user: {
+            id: 2,
+            name: 'Sergio'
+          }
+        },
+        {
+          id: 8,
+          title: 'Cerebro de informático',
+          date: new Date('2018/05/11'),
+          description: '<p>Se busca cerebro de informático. Despues de toda una noche programando a nadie le queda ya. Por favor, ES URGENTE.</p>',
+          images: [
+            'https://cloud10.todocoleccion.online/arte-etnico/tc/2016/02/14/14/54444149.jpg',
+            'https://cloud10.todocoleccion.online/arte-etnico/tc/2016/02/14/14/54444149.jpg'
+          ],
+          location: [34.5, 89.2],
+          tags: ['cerebro', 'pieza', 'imposible'],
+          price: 345,
+          url: 'https://www.google.com',
+          user: {
+            id: 1,
+            name: 'Gistonic'
           }
         }
       ]);

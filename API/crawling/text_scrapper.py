@@ -65,7 +65,7 @@ class TextScrapper:
 
         def get_user():
             return {
-                'name': self.get_by_xpath('/html/body/div/div[2]/div/div[3]/div[2]/div/div[1]/div/div[2]/h2/a/strong/text()'),
+                'name': self.get_by_xpath('/html/body/div/div[2]/div/div[3]/div[2]/div/div[1]/div/div[2]/h2/a/strong/text()')[0],
                 'url': self.get_by_xpath('/html/body/div/div[2]/div/div[3]/div[2]/div/div[1]/div/div[2]/h2/a/@href')
             }
 
