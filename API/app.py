@@ -22,6 +22,11 @@ def get_users():
     users = db.get_users()
     return dumps(users)
 
+@app.route('/users/<user_id>', methods=['GET'])
+def get_posts_by_user():
+    posts = db.get_user_posts(request.args.get('id'))
+    return dumps(posts)
+
 
 @app.route('/posts/<post_id>', methods=['DELETE'])
 def delete_post(post_id):
