@@ -2,7 +2,6 @@ from scrapy import Selector
 from geopy.geocoders import Nominatim
 
 from analysis.vision import VisionAPI
-from text_scrapper import TextScrapper
 import random
 
 
