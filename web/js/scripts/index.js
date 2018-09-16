@@ -16,9 +16,7 @@
 
         var postsDataAccess = new HuntedHaunters.DataAccess.Posts();
         postsDataAccess.loadPosts(function(data) {
-            posts = data.sort(function(a, b) {
-                return a.date < b.date;
-            });
+            posts = data;
             filterPosts(null);
 
             loadTagsChart();
@@ -73,6 +71,9 @@
         } else {
             postsFiltered = posts;
         }
+        postsFiltered.sort(function(a, b) {
+            return parseFloat(a.price) > parseFloat(b.price) ? -1 : 1;
+        })
         postsFiltered.forEach(function (post) {
             addPostToTable(post);
             addPostToMap(post);
@@ -146,7 +147,7 @@
         //$('#postModal_date').html(`${new Date(post.date).getFullYear()}/${new Date(post.date).getMonth()}/${new Date(post.date).getDate()}`);
         $('#postModal_date').html(`${post.date}`);
         $('#postModal_author').html(`<a href='sellers.html?userId=${post.user.id}'>${post.user.name}</a>`);
-        $('#postModal_price').html(HuntedHaunters.Utils.numberToPrice(post.price));
+        $('#postModal_price').html(post.price);
         if (post.url)
             $('#postModal_url').html(`<a href='${post.url}'>${post.url}</a>`);
         $('#postModal_body').html(post.description);
