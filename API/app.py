@@ -20,37 +20,20 @@ def get_posts():
     return dumps(posts)
 
 
-@app.route('/tags')
-def get_tags():
-    return jsonify(
-        [
-            'marfil, rino', 'unicornio'
-        ]
 
-    )
 
 
 @app.route('/users')
 def get_users():
-    return jsonify(
-        [
-            {
-                'name': 'gonredo',
-                'email': 'gonredo@cazador.es',
-                'extra': json.dumps('extra2')},
-            {
-                'name': 'juanjo',
-                'email': 'juanjo@cazador.es',
-                'extra': json.dumps('extra1')}
-
-        ]
-
-    )
+    users = db.get_users()
+    return dumps(users)
 
 
 @app.route('/posts/<id>', methods=['DELETE'])
 def delete_post(id):
-    return 'Hola  se ha borrado el anuncio con id ' + id
+    db.delete_post(id)
+    return "",201
+
 
 @app.route('/images', methods=['GET'])
 def get_images():

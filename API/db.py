@@ -28,11 +28,17 @@ class DBConnection(metaclass=Singleton):
                 gigi.append(y)
                 self.db.users.update_one({"_id": user_find[0]['_id']},{"$set":{"posts": gigi}})
 
+    def insert_tag(self, tag):
+        self.db.tags.insert_one(tag)
+
     def delete_post(self, id):
         self.db.posts.delete_one({"_id": id})
 
     def get_posts(self, filters):
         return self.db.posts.find()
+
+    def get_users(self):
+        return self.db.users.find()
 
     def get_images(self):
         return self.db.ads.find({}, {'images': 1}).limit(16)
