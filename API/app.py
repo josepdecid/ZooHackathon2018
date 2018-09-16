@@ -56,6 +56,7 @@ def insert_post():
         'description': params['description'],
         'date': params['date'],
         'location': [params['location'][0], params['location'][1]],
+        'city': params['city'],
         'images': params['images'],
         'tags': params['tags'],
         'price': params['price'],

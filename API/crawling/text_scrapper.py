@@ -20,6 +20,7 @@ class TextScrapper:
             Description: string
             Date: date
             Location: LatLng
+            City: string
             Images: [url]
             Tags: [string]
             Price: number
@@ -59,6 +60,10 @@ class TextScrapper:
             b = random.uniform(-0.025, 0.025)
             return [str(float(lat_lng[0]) + a), str(float(lat_lng[1]) + b)]
 
+        def get_city():
+            locations = self.get_by_xpath('//*[@id="info_vendedor_box"]/div[1]/div/div[2]/p[2]/text()')
+            return [x.rstrip() for x in locations if len(x) > 1][0]
+
         def get_date():
             dates = self.get_by_xpath('//*[@id="info_vendedor_box"]/div[1]/div/div[2]/p[2]/span[2]/text()')
             date = [x.rstrip() for x in dates if len(x) > 1][0]
@@ -82,6 +87,7 @@ class TextScrapper:
             'description': get_description(),
             'date': get_date(),
             'location': get_location(),
+            'city': get_city(),
             'images': images,
             'tags': get_tags(images),
             'price': get_price(),
