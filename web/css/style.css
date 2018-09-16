@@ -53,3 +53,7 @@
 .modal-description {
   padding: 10px;
 }
+
+#graphContainer {
+  margin: 0;
+}
