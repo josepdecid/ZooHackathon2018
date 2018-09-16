@@ -72,7 +72,7 @@
             postsFiltered = posts;
         }
         postsFiltered.sort(function(a, b) {
-            return parseFloat(a.price) > parseFloat(b.price) ? -1 : 1;
+            return parseFloat(a.price.replace('.','').replace(',','.')) > parseFloat(b.price.replace('.','').replace(',','.')) ? -1 : 1;
         })
         postsFiltered.forEach(function (post) {
             addPostToTable(post);
