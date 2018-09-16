@@ -31,6 +31,7 @@ class TextScrapper:
             }
         }
         """
+
         def get_title():
             return self.get_by_xpath('//*[@id="lote-page-h1"]/text()')[0]
 
@@ -56,7 +57,7 @@ class TextScrapper:
             lat_lng = [location.latitude, location.longitude]
             a = random.uniform(-0.025, 0.025)
             b = random.uniform(-0.025, 0.025)
-            return [str(float(lat_lng[0])+a), str(float(lat_lng[1]) +b)]
+            return [str(float(lat_lng[0]) + a), str(float(lat_lng[1]) + b)]
 
         def get_date():
             dates = self.get_by_xpath('//*[@id="info_vendedor_box"]/div[1]/div/div[2]/p[2]/span[2]/text()')
@@ -64,11 +65,13 @@ class TextScrapper:
             return date
 
         def get_tags(image_urls):
-            return VisionAPI().get_image_labels(image_urls)
+            tags = VisionAPI().get_image_labels(image_urls)
+            return list(set(tags))
 
         def get_user():
             return {
-                'name': self.get_by_xpath('/html/body/div/div[2]/div/div[3]/div[2]/div/div[1]/div/div[2]/h2/a/strong/text()')[0],
+                'name': self.get_by_xpath(
+                    '/html/body/div/div[2]/div/div[3]/div[2]/div/div[1]/div/div[2]/h2/a/strong/text()')[0],
                 'url': self.get_by_xpath('/html/body/div/div[2]/div/div[3]/div[2]/div/div[1]/div/div[2]/h2/a/@href')
             }
 
