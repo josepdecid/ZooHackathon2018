@@ -47,8 +47,9 @@
         var postsDataAccess = new HuntedHaunters.DataAccess.SellerPosts(postsIDs);
         postsDataAccess.loadPosts(function (data) {
             data.forEach(function (post) {
+                console.log(post.url);
                 var rowHtml = `
-                <tr onclick='openModal(${JSON.stringify(post)})'>
+                <tr onclick="window.open('${post.url}', '_blank')">
                     <th>
                         <div class="image-cropper" style="
                             width: 100px;
