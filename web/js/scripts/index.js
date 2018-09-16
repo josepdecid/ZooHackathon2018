@@ -72,10 +72,29 @@
 
         var rowHtml = `
             <tr onclick='openModal(${JSON.stringify(post)})'>
+                <th>
+                    <div class="image-cropper" style="
+                        width: 100px;
+                        height:100px;
+                        position: relative;
+                        overflow: hidden;
+                        border-radius: 50%;
+                    ">
+                        <img src=${post.images[0]} width=110px style="
+                         display: inline;
+                        margin: auto;
+                        height: 100%;
+                        width: 100%; " class="rounded">
+                    </div>
+                </th>
                 <th>${post.title}</th>
                 <td>
                     ${tagsHtml}
                 </td>
+                <td>
+                    <h6>${post.price}€</h6>
+                </td>
+
             </tr>
         `;
         $("#postTable > tbody:last-child").append(rowHtml);

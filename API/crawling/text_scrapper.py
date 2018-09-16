@@ -51,11 +51,11 @@ class TextScrapper:
         def get_location():
             locations = self.get_by_xpath('//*[@id="info_vendedor_box"]/div[1]/div/div[2]/p[2]/text()')
             loc = [x.rstrip() for x in locations if len(x) > 1][0]
-            geolocator = Nominatim(user_agent="HauntedHauters")
+            geolocator = Nominatim(user_agent="HuntedHunters")
             location = geolocator.geocode(loc)
             lat_lng = [location.latitude, location.longitude]
-            a = random.uniform(-0.05, 0.05)
-            b = random.uniform(-0.05, 0.05)
+            a = random.uniform(-0.025, 0.025)
+            b = random.uniform(-0.025, 0.025)
             return [str(float(lat_lng[0])+a), str(float(lat_lng[1]) +b)]
 
         def get_date():
