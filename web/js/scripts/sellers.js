@@ -35,7 +35,6 @@
         $('#sellerModal_location').html(seller.location);
 
         seller.posts.forEach(function (postId) {
-            addPostToModalList(postId);
         });
 
         $('#sellerModal').modal();
