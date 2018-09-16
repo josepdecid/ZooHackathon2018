@@ -13,8 +13,9 @@
         map = new google.maps.Map(document.getElementById("map-container"),
             mapOptions);
 
-        var postsDataAccess = new HuntedHaunters.DataAccess.PostsMock();
+        var postsDataAccess = new HuntedHaunters.DataAccess.Posts();
         postsDataAccess.loadPosts(function(data) {
+            data = JSON.parse(data);
             posts = data.sort(function(a, b) {
                 return a.date < b.date;
             });

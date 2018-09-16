@@ -32,7 +32,7 @@ class DBConnection(metaclass=Singleton):
         self.db.posts.delete_one({"_id": id})
 
     def get_posts(self, filters):
-        return self.db.ads.find()
+        return self.db.posts.find()
 
     def get_images(self):
         return self.db.ads.find({}, {'images': 1}).limit(16)
