@@ -2,9 +2,12 @@
     var sellers = [];
 
     function onClickNode(event) {
-        // MOCK
-        var seller = sellers[0];
-        openModal(seller);
+        var sellerId = parseInt(event.data.node.id.replace('n_',''));
+        var seller = sellers.filter(function (seller) {
+            return seller._id === sellerId;
+        })[0];
+        if (seller)
+            openModal(seller);
     };
 
     function renderGraph() {
