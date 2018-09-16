@@ -103,7 +103,8 @@
     window.openModal = function(post) {
 
         $('#postModal_title').html(post.title);
-        $('#postModal_date').html(`${new Date(post.date).getFullYear()}/${new Date(post.date).getMonth()}/${new Date(post.date).getDate()}`);
+        //$('#postModal_date').html(`${new Date(post.date).getFullYear()}/${new Date(post.date).getMonth()}/${new Date(post.date).getDate()}`);
+        $('#postModal_date').html(`${post.date}`);
         $('#postModal_author').html(`<a href='sellers.html?userId=${post.user.id}'>${post.user.name}</a>`);
         $('#postModal_price').html(HuntedHaunters.Utils.numberToPrice(post.price));
         if (post.url)
