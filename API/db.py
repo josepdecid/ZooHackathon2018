@@ -36,7 +36,8 @@ class DBConnection(metaclass=Singleton):
         self.db.posts.delete_one({"_id": id})
 
     def get_posts(self, filters):
-        return self.db.posts.find({'tags': {'$in': filters}})
+        filters = {} if len(filters) == 0 else {'tags': {'$in': filters}}
+        return self.db.posts.find(filters)
 
     def get_users(self):
         return self.db.users.find()
