@@ -65,20 +65,19 @@ def get_images():
 def insert_post():
     posts = loads(request.data)
     post = [{
-        "title": params['title'],
-        "description": params['description'],
-        "date": params['date'],
-        "location": [params['location'][0], params['location'][1]],
-        "images": [params['title'], params['title']],
-        "user": {
+        'title': params['title'],
+        'description': params['description'],
+        'date': params['date'],
+        'location': [params['location'][0], params['location'][1]],
+        'images': params['images'],
+        'tags': params['tags'],
+        'price': params['price'],
+        'url': params['url'],
+        'user': {
             "_id": abs(hash(params['user']['name'])) % (10 ** 8),
-            "name": params['title'],
-            "email": params['title'],
-            "extra": []
-        },
-        "categories": [1, params['title']],
-        "price": 1,
-        "url": 1
+            "name": params['user']['name'],
+            'url': params['user']['url']
+        }
     } for params in posts]
     db.insert_posts(post)
     return "", 201
