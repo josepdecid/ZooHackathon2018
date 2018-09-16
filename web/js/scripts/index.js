@@ -26,12 +26,26 @@
             loadTagsChart();
         });
 
+        var tags = [];
+        posts.forEach(function(post) {
+            post.tags.forEach(function(tag) {
+                var existingTag = tags.filter(function(existingTag) {
+                    return existingTag.name === tag
+                })[0];
+
+                if (!existingTag) {
+                    tags.push(tag);
+                }
+            });
+        });
+
         $('#tags').tokenfield({
             autocomplete: {
-                source: ['cocodrilo, marfil, nilo'],
-                delay: 100
+                source: tags,
+                delay: 100,
+                minLength: 1
             },
-            showAutocompleteOnFocus: true
+            showAutocompleteOnFocus: true,
         })
     }
 
