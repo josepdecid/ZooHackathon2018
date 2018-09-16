@@ -1,5 +1,5 @@
 (function () {
-    // API_URL = 'http://46.101.56.168:8080';
+    //API_URL = 'http://46.101.56.168:8080';
     API_URL = 'http://localhost:5000';
     //
 

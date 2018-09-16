@@ -11,8 +11,36 @@
     function renderGraph() {
         var sigmaInstance = new sigma('graphContainer');
 
-        var graphMock = new HuntedHaunters.DataAccess.GraphMock();
-        graphMock.setGraphData(sigmaInstance.graph);
+        sellers.forEach(function(seller) {
+            sigmaInstance.graph.addNode({
+                id: 'n_' + seller._id,
+                label: seller.name,
+                x: Math.random(),
+                y: Math.random(),
+                size: 1,
+                color: '#f00'
+            });
+        });
+
+        var edgeCount = 0;
+        while(Math.random() > 0.01 && edgeCount < 100) {
+            var sellerIndex_1 = Math.floor(Math.random() * sellers.length);
+            var seller_1 = sellers[sellerIndex_1];
+            var sellerIndex_2 = Math.floor(Math.random() * sellers.length);
+            var seller_2 = sellers[sellerIndex_2];
+            if (sellerIndex_1 !== sellerIndex_2) {
+                try {
+                    sigmaInstance.graph.addEdge({
+                        id: 'e_' + seller_1._id + '_' + seller_2._id,
+                        source: 'n_' + seller_1._id,
+                        target: 'n_' + seller_2._id
+                    });
+                    edgeCount++;
+                } catch(ex) {
+                    console.log('catched error: ' + ex.message);
+                }
+            }
+        }
 
         sigmaInstance.bind('clickNode', onClickNode);
 

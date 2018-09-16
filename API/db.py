@@ -10,7 +10,7 @@ db_url = 'mongodb+srv://HuntedHunter:HuntedHunter@cluster0-jnjqf.mongodb.net/tes
 class DBConnection(metaclass=Singleton):
 
     def __init__(self):
-        client = MongoClient(db_url)
+        client = MongoClient()
         self.db = client[db_name]
 
     def insert_posts(self, posts):
