@@ -105,6 +105,38 @@
         });
     }
 
+    function resetDashboard() {
+        $('#sellerTable > tbody').html('');
+    }
+
+    function filterSellers(filter) {
+        resetDashboard();
+
+        var filteredSellers = []
+        if (filter === null) {
+            filteredSellers = sellers;
+        } else {
+            filteredSellers = sellers.filter(function(seller) {
+                return seller.name.toLowerCase().indexOf(filter.toLowerCase()) !== -1;
+            });
+        }
+        
+        filteredSellers.forEach(function (seller) {
+            addSellerToTable(seller);
+        });
+    };
+
+    function filterNotEmpty(filter) {
+        var result = false;
+        for(var i = 0; i < filter.length; i++) {
+            if (filter.charAt(i) !== ' ') {
+                result = true;
+                break;
+            }
+        }
+        return result;
+    };
+
     $(document).ready(function () {
         var authorsDataAccess = new HuntedHaunters.DataAccess.Sellers();
         authorsDataAccess.loadSellers(function (data) {
@@ -112,9 +144,8 @@
             sellers.sort(function (a, b) {
                 return a.posts.length < b.posts.length
             });
-            sellers.forEach(function (seller) {
-                addSellerToTable(seller);
-            });
+            
+            filterSellers(null);
 
             renderGraph();
 
@@ -127,6 +158,19 @@
                     openModal(seller);
                 }
             }
+
+            $('#searchAuthorForm').on('submit', function (e) {
+                var filter = $('#authorInput')[0].value;
+                if (typeof filter !== 'undefined' && filter !== null
+                        && filterNotEmpty(filter)) {
+                    
+                    console.log(filter);
+                    filterSellers(filter);
+                } else {
+                    filterSeller(null);
+                }
+                return false;
+            });
         });
     })
 })();
