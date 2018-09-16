@@ -1,11 +1,13 @@
 import scrapy
 from scrapy import Selector
+import requests
 from scrapy.crawler import CrawlerProcess
 import os
 import re
 import time
 from text_scrapper import TextScrapper
 extra_url = ''
+headers = {'Content-Type': 'application/json', 'Accept':'application/json'}
 
 class AdCrawler(scrapy.Spider):
     name = 'milanuncios'
@@ -132,6 +134,7 @@ def ffff(url):
     #card-product-detail-description
 
     print(AdCrawler.data[0])
+    requests.post('http://46.101.56.168:8080/posts', json=[AdCrawler.data[0]], headers=headers)
 
 
 
