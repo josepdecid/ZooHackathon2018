@@ -130,7 +130,7 @@
         label: 'dani344',
         x: 0.15,
         y: 0.45,
-        size: 2,
+        size: 3,
         color: color
       }).addNode({
         id: 'n2',
@@ -158,28 +158,28 @@
         label: 'rhinobrother99',
         x: 0.6,
         y: 0.3,
-        size: 2,
+        size: 3,
         color: color
       }).addNode({
         id: 'n6',
         label: 'the_killer',
         x: 0.02,
         y: 0.1,
-        size: 2,
+        size: 1,
         color: color
       }).addNode({
         id: 'n7',
         label: 'Gistonic',
         x: 0.45,
         y: 0.66,
-        size: 2,
+        size: 4,
         color: color
       }).addNode({
         id: 'n8',
         label: 'Sergio',
         x: 0.48,
         y: 0.9,
-        size: 2,
+        size: 1,
         color: color
       });
     };
