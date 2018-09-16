@@ -5,7 +5,12 @@
     var _this = {};
 
     _this.loadPosts = function(callback) {
-      $.get( "http://localhost:5000/posts", function( data ) {
+      $.get( "http://46.101.56.168:8080/posts", function( data ) {
+        data = JSON.parse(data);
+        data.forEach(function(post) {
+          post.id = post._id.oid;
+          post.user.id = post.user._id;
+        });
         callback(data);
       });
     }

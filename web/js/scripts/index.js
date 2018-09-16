@@ -15,7 +15,6 @@
 
         var postsDataAccess = new HuntedHaunters.DataAccess.Posts();
         postsDataAccess.loadPosts(function(data) {
-            data = JSON.parse(data);
             posts = data.sort(function(a, b) {
                 return a.date < b.date;
             });
@@ -132,8 +131,6 @@
             });
         });
         tags = tags.sort(function(tag1, tag2) {
-            console.log(tag1);
-            console.log(tag2);
             if (tag1.count > tag2.count)
                 return -1;
             if (tag1.count < tag2.count)
