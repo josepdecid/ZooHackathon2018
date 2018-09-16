@@ -3,6 +3,13 @@
     var map = null;
     var markers = [];
 
+    function onDiscard(post_id) {
+        console.log('Ay', post_id);
+
+        var deleteDataAccess = new HuntedHaunters.DataAccess.Posts();
+        deleteDataAccess.discardPost(post_id);
+    }
+
     function regular_map() {
         var location = new google.maps.LatLng(40.42, -3.70);
 
@@ -170,6 +177,8 @@
         $('#postModal_imagesIndicators > li').first().addClass('active');
         $('#postModal_images > div').first().addClass('active');
         $('#carouselExampleIndicators').carousel();
+        $('#discard-button').unbind('click')
+        $('#discard-button').click(() => onDiscard(post.id));
         $('#postModal').modal();
     };
 

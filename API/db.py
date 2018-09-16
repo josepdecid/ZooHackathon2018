@@ -1,5 +1,6 @@
 import copy
 
+from bson import ObjectId
 from pymongo import MongoClient
 from utils import Singleton
 
@@ -32,8 +33,8 @@ class DBConnection(metaclass=Singleton):
     def insert_tag(self, tag):
         self.db.tags.insert_one(tag)
 
-    def delete_post(self, id):
-        self.db.posts.delete_one({"_id": id})
+    def delete_post(self, post_id):
+        self.db.posts.delete_one({"_id": ObjectId(post_id)})
 
     def get_posts(self, filters):
         filters = {} if len(filters) == 0 else {'tags': {'$in': filters}}
