@@ -147,7 +147,6 @@
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 id="sellerModal_name" class="modal-title" id="exampleModalLabel"></h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -155,7 +154,7 @@
                 <div class="modal-body">
                     <div class="row">
                         <div class="col-md-6">
-                            <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                            <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" style="width: 80%;">
                                 <ol class="carousel-indicators">
                                     <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
                                     <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
@@ -163,14 +162,14 @@
                                 </ol>
                                 <div class="carousel-inner">
                                     <div class="carousel-item active">
-                                        <img class="d-block w-100" src="http://www.quo.es/var/quo/storage/images/tecnologia/internet/las_mejores_senoras_que/212988-1-esl-ES/las_mejores_senoras_que_ampliacion.jpg" alt="First slide">
+                                        <img class="d-block w-100" src="http://pngimage.net/wp-content/uploads/2018/05/default-profile-pic-png-8.png" alt="First slide">
                                     </div>
-                                    <div class="carousel-item">
+                                    <!--<div class="carousel-item">
                                         <img class="d-block w-100" src="http://www.quo.es/var/quo/storage/images/tecnologia/internet/las_mejores_senoras_que/212988-1-esl-ES/las_mejores_senoras_que_ampliacion.jpg" alt="Second slide">
                                     </div>
                                     <div class="carousel-item">
                                         <img class="d-block w-100" src="http://www.quo.es/var/quo/storage/images/tecnologia/internet/las_mejores_senoras_que/212988-1-esl-ES/las_mejores_senoras_que_ampliacion.jpg" alt="Third slide">
-                                    </div>
+                                    </div>-->
                                 </div>
                                 <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
                                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -182,7 +181,13 @@
                                 </a>
                             </div>
                         </div>
-                        <div id="sellerModal_body" class="col-md-6"></div>
+                        <div class="col-md-6">
+                            <h5 id="sellerModal_name" class="modal-title"></h5><br>
+                            <h6 id="sellerModal_location" class="modal-title"></h6><br>
+                            <h6 id="sellerModal_countposts" class="modal-title"></h6><br>
+                            <h6 id="sellerModal_profile" class="modal-title"></h6>
+                        </div>
+                        <br>
                         <table id="postAuthorTable" class="table table-hover">
                                 <!-- Table body -->
                                 <tbody></tbody>

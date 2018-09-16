@@ -58,9 +58,11 @@
     }
 
     window.openModal = function (seller) {
-        $('#sellerModal_name').html(seller.name);
-        $('#sellerModal_body').html(seller.posts.length); //TODO
+        $('#sellerModal_name').html('Usuario: <strong>' + seller.name + '</strong>');
         $('#sellerModal_location').html(seller.location);
+        $('#sellerModal_countposts').html('Número publicaciones: <strong>' + seller.posts.length + '</strong>');
+        $('#sellerModal_profile').html('Visitar perfil: <a href="https://www.todocoleccion.net/usuario/' + seller.name +
+            '" target="_blank" <button class="btn btn-primary btn-sm my-0 p">todocoleccion</button></a>');
 
         var postsIDs = '';
         seller.posts.forEach(function (postId) {
@@ -75,8 +77,8 @@
     function addPostsToModalList(postsIDs) {
         var postsDataAccess = new HuntedHaunters.DataAccess.SellerPosts(postsIDs);
         postsDataAccess.loadPosts(function (data) {
+            $('#sellerModal_location').html('Ubicación: <strong>' + data[0].city + '</strong>');
             data.forEach(function (post) {
-                console.log(post.url);
                 var rowHtml = `
                 <tr onclick="window.open('${post.url}', '_blank')">
                     <th>
@@ -121,7 +123,7 @@
                 return seller.name.toLowerCase().indexOf(filter.toLowerCase()) !== -1;
             });
         }
-        
+
         filteredSellers.forEach(function (seller) {
             addSellerToTable(seller);
         });
@@ -145,7 +147,7 @@
             sellers.sort(function (a, b) {
                 return a.posts.length < b.posts.length ? 1 : -1;
             });
-            
+
             filterSellers(null);
 
             renderGraph();
@@ -164,7 +166,7 @@
                 var filter = $('#authorInput')[0].value;
                 if (typeof filter !== 'undefined' && filter !== null
                         && filterNotEmpty(filter)) {
-                    
+
                     filterSellers(filter);
                 } else {
                     filterSeller(null);
