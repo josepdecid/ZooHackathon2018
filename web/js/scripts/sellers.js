@@ -143,7 +143,7 @@
         authorsDataAccess.loadSellers(function (data) {
             sellers = JSON.parse(data);
             sellers.sort(function (a, b) {
-                return a.posts.length < b.posts.length
+                return a.posts.length < b.posts.length ? 1 : -1;
             });
             
             filterSellers(null);
