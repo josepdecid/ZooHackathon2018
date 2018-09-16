@@ -7,6 +7,7 @@ from text_scrapper import TextScrapper
 
 headers = {'Content-Type': 'application/json', 'Accept':'application/json'}
 
+
 class AdCrawler(scrapy.Spider):
     name = 'TodoColección'
     base_url = 'https://www.todocoleccion.net/app/buscador?O=mas&bu='

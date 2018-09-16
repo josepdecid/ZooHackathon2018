@@ -27,7 +27,7 @@ class DBConnection(metaclass=Singleton):
                 user_find[0]['posts'].append(y)
                 gigi = copy.deepcopy(user_find[0]['posts'])
                 gigi.append(y)
-                self.db.users.update_one({"_id": user_find[0]['_id']},{"$set":{"posts": gigi}})
+                self.db.users.update_one({"_id": user_find[0]['_id']}, {"$set": {"posts": gigi}})
 
     def insert_tag(self, tag):
         self.db.tags.insert_one(tag)
@@ -36,7 +36,7 @@ class DBConnection(metaclass=Singleton):
         self.db.posts.delete_one({"_id": id})
 
     def get_posts(self, filters):
-        return self.db.posts.find()
+        return self.db.posts.find({'tags': {'$in': filters}})
 
     def get_users(self):
         return self.db.users.find()

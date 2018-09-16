@@ -1,12 +1,9 @@
-import json
-
 from bson.json_util import dumps, loads
 from flask import Flask, request
-from flask import jsonify
 from flask_cors import CORS
 
-from db import DBConnection
 from analysis.vision import VisionAPI
+from db import DBConnection
 
 app = Flask(__name__)
 CORS(app)
@@ -20,19 +17,16 @@ def get_posts():
     return dumps(posts)
 
 
-
-
-
 @app.route('/users')
 def get_users():
     users = db.get_users()
     return dumps(users)
 
 
-@app.route('/posts/<id>', methods=['DELETE'])
-def delete_post(id):
-    db.delete_post(id)
-    return "",201
+@app.route('/posts/<post_id>', methods=['DELETE'])
+def delete_post(post_id):
+    db.delete_post(post_id)
+    return "", 201
 
 
 @app.route('/images', methods=['GET'])
