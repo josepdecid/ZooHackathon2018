@@ -2,6 +2,7 @@ from scrapy import Selector
 from geopy.geocoders import Nominatim
 
 from analysis.vision import VisionAPI
+import random
 
 
 class TextScrapper:
@@ -53,7 +54,9 @@ class TextScrapper:
             geolocator = Nominatim(user_agent="HauntedHauters")
             location = geolocator.geocode(loc)
             lat_lng = [location.latitude, location.longitude]
-            return lat_lng
+            a = random.uniform(-0.05, 0.05)
+            b = random.uniform(-0.05, 0.05)
+            return [str(float(lat_lng[0])+a), str(float(lat_lng[1]) +b)]
 
         def get_date():
             dates = self.get_by_xpath('//*[@id="info_vendedor_box"]/div[1]/div/div[2]/p[2]/span[2]/text()')
