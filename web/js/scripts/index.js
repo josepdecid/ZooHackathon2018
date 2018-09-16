@@ -25,6 +25,14 @@
 
             loadTagsChart();
         });
+
+        $('#tags').tokenfield({
+            autocomplete: {
+                source: ['cocodrilo, marfil, nilo'],
+                delay: 100
+            },
+            showAutocompleteOnFocus: true
+        })
     }
 
     function addPostToMap(post) {
