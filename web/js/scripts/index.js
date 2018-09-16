@@ -12,11 +12,25 @@
 
         map = new google.maps.Map(document.getElementById("map-container"),
             mapOptions);
+
+        var postsDataAccess = new HuntedHaunters.DataAccess.PostsMock();
+        postsDataAccess.loadPosts(function(data) {
+            data.sort(function(a, b) {
+                return a.date < b.date;
+            });
+            posts = data;
+            posts.forEach(function (post) {
+                addPostToTable(post);
+                addPostToMap(post);
+            });
+
+            loadTagsChart();
+        });
     }
 
     function addPostToMap(post) {
         var marker = new google.maps.Marker({
-            position: new google.maps.LatLng(post.location.latitude, post.location.longitude),
+            position: new google.maps.LatLng(post.location[0], post.location[1]),
             map: map,
             title: post.title
         });
@@ -79,18 +93,67 @@
         $('#postModal').modal();
     };
 
-    google.maps.event.addDomListener(window, 'load', regular_map);
+    function loadTagsChart() {
+        var tags = [];
+        posts.forEach(function(post) {
+            post.tags.forEach(function(tag) {
+                var existingTag = tags.filter(function(existingTag) {
+                    return existingTag.name === tag
+                })[0];
 
-    $(document).ready(function () {
-        var postsDataAccess = new HuntedHaunters.DataAccess.PostsMock();
-        postsDataAccess.loadPosts(function(data) {
-            posts = data.sort(function(a, b) {
-                return a.date < b.date;
+                if (existingTag) {
+                    existingTag.count += 1;
+                } else {
+                    tags.push({
+                        name: tag,
+                        count: 1
+                    })
+                }
             });
-            posts.forEach(function (post) {
-                addPostToTable(post);
-                addPostToMap(post);
-            })
         });
-    })
+        tags.sort(function(tag1, tag2) { return tag1.count <= tag2.count});
+        tags = tags.slice(0, 5);
+
+        var ctx = document.getElementById("tagsChart").getContext('2d');
+        var chart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: tags.map(function(tag) { return `#${tag.name}`; }),
+                datasets: [
+                    {
+                        label: '# ocurrencias',
+                        data: tags.map(function(tag) { return tag.count; }),
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.2)',
+                            'rgba(54, 162, 235, 0.2)',
+                            'rgba(255, 206, 86, 0.2)',
+                            'rgba(75, 192, 192, 0.2)',
+                            'rgba(153, 102, 255, 0.2)',
+                            'rgba(255, 159, 64, 0.2)'
+                        ],
+                        borderColor: [
+                            'rgba(255,99,132,1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(153, 102, 255, 1)',
+                            'rgba(255, 159, 64, 1)'
+                        ],
+                        borderWidth: 1
+                    }
+                ]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                }
+            }
+        });
+    };
+
+    google.maps.event.addDomListener(window, 'load', regular_map);
 })();
