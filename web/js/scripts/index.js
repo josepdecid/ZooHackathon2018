@@ -59,17 +59,15 @@
         var imageIndicatorsHtml = '';
         var imagesHtml = '';
         post.images.forEach(function(image, index) {
-            var indicatorHtml = `
+            imageIndicatorsHtml += `
                 <li data-target="#carouselExampleIndicators" data-slide-to="${index}"></li>
             `;
-            imageIndicatorsHtml += indicatorHtml;
 
-            var html = `
+            imagesHtml += `
                 <div class="carousel-item">
                     <img class="d-block w-100" src="${image}">
                 </div>
             `;
-            imagesHtml += html;
         });
         $('#postModal_imagesIndicators').html(imageIndicatorsHtml);
         $('#postModal_images').html(imagesHtml);

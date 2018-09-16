@@ -9,7 +9,7 @@ from text_scrapper import TextScrapper
 class AdCrawler(scrapy.Spider):
     name = 'TodoColección'
     base_url = 'https://www.todocoleccion.net/app/buscador?O=mas&bu='
-    search_keywords = ['rinoceronte']
+    search_keywords = ['rinoceronte', 'marfil', 'cuerno', 'pangolin', 'tigre']
     hrefs = []
 
     def start_requests(self):
@@ -39,7 +39,7 @@ class AdCrawler(scrapy.Spider):
         item_content = Selector(response=response, type='html')\
             .xpath('//div[re:test(@class, "contenido")]').extract()
         data = TextScrapper(item_content[0], response.url).extract_to_json()
-        requests.post('http://127.0.0.1:5000/posts', data)
+        # requests.post('http://127.0.0.1:5000/posts', data)
 
 
 process = CrawlerProcess()

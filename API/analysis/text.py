@@ -2,9 +2,13 @@ from google.cloud import language
 from google.cloud.language import enums
 from google.cloud.language import types
 
-client = language.LanguageServiceClient()
 
-text = u'Antiguo bol Chino en cuerno de rinoceronte labrado de 1ª mitad del Siglo XX, con decoración de escena costumbrista con figuras en un paisaje floral, 11,5 x 7,0 cm. y 299 gr. sin peana'
+class TextAPI:
+    def __init__(self, text):
+        self.client = language.LanguageServiceClient()
+        self.text = text
+        self.maxResults = 10
 
-document = types.Document(content=text, type=enums.Document.Type.PLAIN_TEXT)
-print(client.analyze_entities(document).entities)
+    def get_category(self):
+        document = types.Document(content=self.text, type=enums.Document.Type.PLAIN_TEXT)
+        return self.client.classify_text(document).categories

@@ -1,6 +1,6 @@
 import json
 
-from bson.json_util import dumps
+from bson.json_util import dumps, loads
 from flask import Flask, request
 from flask import jsonify
 from flask_cors import CORS
@@ -63,24 +63,25 @@ def get_images():
 
 @app.route('/posts', methods=['POST'])
 def insert_post():
-    json = request.data
-    post = {
-        "title": json['title'],
-        "description": json['description'],
-        "date": json['date'],
-        "location": [json['location']['latitude'], json['location']['longitude']],
-        "images": [json['title'], json['title']],
+    posts = loads(request.data)
+    post = [{
+        "title": params['title'],
+        "description": params['description'],
+        "date": params['date'],
+        "location": [params['location'][0], params['location'][1]],
+        "images": [params['title'], params['title']],
         "user": {
-            "name": json['title'],
-            "email": json['title'],
+            "_id": abs(hash(params['user']['name'])) % (10 ** 8),
+            "name": params['title'],
+            "email": params['title'],
             "extra": []
         },
-        "categories": [1, json['title']],
+        "categories": [1, params['title']],
         "price": 1,
         "url": 1
-    }
+    } for params in posts]
     db.insert_posts(post)
-    return 201
+    return "", 201
 
 
 if __name__ == '__main__':

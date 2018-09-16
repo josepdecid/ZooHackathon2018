@@ -5,9 +5,9 @@ from ad_scrapper_wallapop_s import crawlSingle
 import time
 import os
 
-class AdCrawler(scrapy.Spider):
-    name = 'wallapop'
-    #base_url = 'https://www.todocoleccion.net/app/buscador?O=mas&bu='
+
+class CrawlerWallapop(scrapy.Spider):
+    name = 'Wallapop'
     base_url = 'https://es.wallapop.com/search?kws='
     search_keywords = ['rinoceronte', 'marfil', 'cuerno']
     results = []
@@ -39,7 +39,7 @@ class AdCrawler(scrapy.Spider):
 
 def execute():
     process = CrawlerProcess()
-    process.crawl(AdCrawler)
+    process.crawl(CrawlerWallapop)
     process.start()
 
     print("#####################################------------------------------------########################")
