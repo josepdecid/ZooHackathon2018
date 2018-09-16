@@ -27,11 +27,12 @@ class VisionAPI:
         r = requests.post(self.build_url(), data=json).json()
 
         total_labels = []
-        for resp in r['responses']:
-            labels = []
-            if 'labelAnnotations' in resp:
-                for label in resp['labelAnnotations']:
-                    labels.append(label['description'])
-            total_labels.append(labels)
-        total_labels = [item for sublist in total_labels for item in sublist]
+        if 'responses' in r:
+            for resp in r['responses']:
+                labels = []
+                if 'labelAnnotations' in resp:
+                    for label in resp['labelAnnotations']:
+                        labels.append(label['description'])
+                total_labels.append(labels)
+            total_labels = [item for sublist in total_labels for item in sublist]
         return total_labels

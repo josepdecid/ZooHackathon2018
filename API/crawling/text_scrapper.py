@@ -38,7 +38,10 @@ class TextScrapper:
             return '' if len(description) == 0 else description[0]
 
         def get_price():
-            return self.get_by_xpath('//*[@id="lote-info"]/div/div[1]/span[1]/span/text()')[0]
+            price = self.get_by_xpath('//*[@id="lote-info"]/div/div[1]/span[1]/span/text()')
+            if len(price) == 0:
+                price = self.get_by_xpath('//span[re:test(@class, "lote-precio")]//text()')
+            return price[0]
 
         def get_images():
             images_url = self.get_by_xpath('//*[@id="foto_principal"]/img/@src')
