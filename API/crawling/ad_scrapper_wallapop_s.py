@@ -4,6 +4,7 @@ from scrapy.crawler import CrawlerProcess
 import os
 import re
 import time
+from analysis.vision import VisionAPI
 extra_url = ''
 
 class AdCrawler(scrapy.Spider):
@@ -116,7 +117,7 @@ class AdCrawler(scrapy.Spider):
             'date': self.date,
             'location': self.location,
             'images': images,
-            # 'tags': get_tags(images),
+            'tags': VisionAPI().get_image_labels(images),
             'price': self.price,
             'url': (self.base_url + self.extra_url).rsplit(),
             'user': self.user
